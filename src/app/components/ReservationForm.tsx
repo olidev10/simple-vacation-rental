@@ -311,7 +311,7 @@ const ReservationForm = () => {
                 open={guestsPopoverOpen}
                 onOpenChange={setGuestsPopoverOpen}
                 divClassName="border-none"
-                className="border! bg-muted! border-border! w-full!"
+                className="border! bg-muted! border-border! w-full! h-10! sm:h-9!"
                 background="bg-card!"
                 bgIcon="text-primary!"
               />

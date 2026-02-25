@@ -86,7 +86,7 @@ const ReviewCard = ({ review, index }: ReviewCardProps) => {
                   {review.tags.map((tag) => (
                     <span
                       key={tag}
-                      className={cn("text-xs px-2.5 py-1 rounded-full", tag === "Google" ? "bg-accent" : "bg-pink-600" )}
+                      className={cn("text-xs px-2 py-1 rounded-full", tag === "Google" ? "bg-accent" : "bg-pink-600" )}
                     >
                       {tag}
                     </span>
@@ -100,12 +100,7 @@ const ReviewCard = ({ review, index }: ReviewCardProps) => {
           </div>
         </div>
 
-        {/* Menu kebab */}
-        <button className="text-neutral-300 hover:text-neutral-500 transition-colors p-1 rounded-full hover:bg-neutral-100">
-          <span className="text-lg leading-none tracking-widest select-none">
-            ···
-          </span>
-        </button>
+      
       </div>
 
       {/* Estrelas */}
