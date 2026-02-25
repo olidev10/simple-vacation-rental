@@ -31,12 +31,18 @@ export function Amenities() {
     <section className="py-16 lg:py-20 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-sm uppercase tracking-wider text-primary font-medium mb-4">
+          <p className="text-sm uppercase tracking-wider text-primary font-semibold mb-4">
             {t("amenities.title")}
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-            {t("amenities.subtitle")}
-          </h2>
+          <div className="flex items-center gap-4 text-center justify-center">
+  <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+    {t("amenities.subtitle")}
+  </h2>
+
+  <h2 className="text-4xl md:text-5xl font-bold text-primary">
+    {t("amenities.description")}
+  </h2>
+</div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -20,6 +20,7 @@ import { ptBR } from "date-fns/locale";
 import type { DateRange } from "react-day-picker";
 import { useQuery } from "@tanstack/react-query";
 import { getAirbnbCalendar, type Booking } from "@/lib/airbnbCalendar";
+import { PopoverGuest } from "./PopoverGuest";
 
 const BookingWidget = () => {
   const { t } = useTranslation();
@@ -96,15 +97,20 @@ const BookingWidget = () => {
 
   const goToReservation = () => {
     const params = new URLSearchParams();
-    if (checkInDate)
-      params.set("checkIn", checkInDate.toISOString());
-    if (checkOutDate)
-      params.set("checkOut", checkOutDate.toISOString());
-    const total = guests.adultos + guests.criancas;
-    if (total > 0) params.set("guests", String(Math.min(10, total)));
+    
+    if (checkInDate) params.set("checkIn", checkInDate.toISOString());
+    if (checkOutDate) params.set("checkOut", checkOutDate.toISOString());
+    
+    if (guests.adultos > 0) params.set("adults", String(guests.adultos));
+    if (guests.criancas > 0) params.set("children", String(guests.criancas));
+    if (guests.bebes > 0) params.set("babies", String(guests.bebes));
+    if (animals > 0) params.set("animals", String(animals));
+  
     const query = params.toString();
     const url = query ? `/?${query}#reservation` : `/#reservation`;
+    
     router.push(url);
+  
     setTimeout(() => {
       document.getElementById("reservation")?.scrollIntoView({
         behavior: "smooth",
@@ -146,7 +152,7 @@ const BookingWidget = () => {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent
-                  className="w-auto bg-[#03303E]/70 backdrop-blur-xl border-white/30 rounded-lg shadow-2xl text-white"
+                  className="w-auto bg-[#03303E]/70 backdrop-blur-xl border-none shadow-2xl text-white"
                   align="end"
                   onOpenAutoFocus={(e) => e.preventDefault()}
                 >
@@ -220,165 +226,15 @@ const BookingWidget = () => {
             </div>
           </div>
 
-          {/* Guests Picker */}
-          <div className="w-full md:w-auto">
-            <div className="flex flex-col gap-2 border-b border-white/20 pb-3">
-              <Label className="text-white/70 text-xs sm:text-sm md:text-md uppercase tracking-widest font-light">
-                {t("hero.guestsLabel")}
-              </Label>
-              <Popover
-                open={guestsPopoverOpen}
-                onOpenChange={setGuestsPopoverOpen}
-              >
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="w-full md:w-60 justify-between font-normal border-none shadow-none text-white/70 cursor-pointer p-0! bg-transparent hover:bg-transparent hover:text-white/50 text-xs sm:text-sm h-auto"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Users className="h-4 w-4 shrink-0" />
-                      <span className="truncate">
-                        {totalGuests === 0
-                          ? t("hero.guests")
-                          : `${totalGuests} ${totalGuests > 1 ? t("hero.guest_plural") : t("hero.guest_singular")}`}
-                      </span>
-                    </div>
-                    <ChevronDownIcon className="h-4 w-4 shrink-0" />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[calc(100vw-2rem)] sm:w-80 bg-[#03303E]/70 backdrop-blur-xl border-white/30 rounded-lg shadow-2xl">
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between py-1">
-                      <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">
-                          {t("hero.adults")}
-                        </Label>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <ButtonRounded
-                          icon={<Minus className="h-4 w-4" />}
-                          onClick={() =>
-                            setGuests((prev) => ({
-                              ...prev,
-                              adultos: Math.max(0, prev.adultos - 1),
-                            }))
-                          }
-                          disabled={guests.adultos === 0}
-                        />
-                        <span className="w-10 text-center text-white font-semibold text-lg">
-                          {guests.adultos}
-                        </span>
-                        <ButtonRounded
-                          icon={<Plus className="h-4 w-4" />}
-                          onClick={() =>
-                            setGuests((prev) => ({
-                              ...prev,
-                              adultos: prev.adultos + 1,
-                            }))
-                          }
-                          disabled={totalGuests >= 10}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between py-1">
-                      <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">
-                          {t("hero.children")}
-                        </Label>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <ButtonRounded
-                          icon={<Minus className="h-4 w-4" />}
-                          onClick={() =>
-                            setGuests((prev) => ({
-                              ...prev,
-                              criancas: Math.max(0, prev.criancas - 1),
-                            }))
-                          }
-                          disabled={guests.criancas === 0}
-                        />
-                        <span className="w-10 text-center text-white font-semibold text-lg">
-                          {guests.criancas}
-                        </span>
-                        <ButtonRounded
-                          icon={<Plus className="h-4 w-4" />}
-                          onClick={() =>
-                            setGuests((prev) => ({
-                              ...prev,
-                              criancas: prev.criancas + 1,
-                            }))
-                          }
-                          disabled={totalGuests >= 10}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between py-1">
-                      <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">
-                          {t("hero.babies")}
-                        </Label>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <ButtonRounded
-                          icon={<Minus className="h-4 w-4" />}
-                          onClick={() =>
-                            setGuests((prev) => ({
-                              ...prev,
-                              bebes: Math.max(0, prev.bebes - 1),
-                            }))
-                          }
-                          disabled={guests.bebes === 0}
-                        />
-                        <span className="w-10 text-center text-white font-semibold text-lg">
-                          {guests.bebes}
-                        </span>
-                        <ButtonRounded
-                          icon={<Plus className="h-4 w-4" />}
-                          onClick={() =>
-                            setGuests((prev) => ({
-                              ...prev,
-                              bebes: prev.bebes + 1,
-                            }))
-                          }
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between py-1">
-                      <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">
-                          {t("hero.animals")}
-                        </Label>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <ButtonRounded
-                          icon={<Minus className="h-4 w-4" />}
-                          onClick={() =>
-                            setAnimals((prev) => Math.max(0, prev - 1))
-                          }
-                          disabled={animals === 0}
-                        />
-                        <span className="w-10 text-center text-white font-semibold text-lg">
-                          {animals}
-                        </span>
-                        <ButtonRounded
-                          icon={<Plus className="h-4 w-4" />}
-                          onClick={() => setAnimals((prev) => prev + 1)}
-                          disabled={animals > 2}
-                        />
-                      </div>
-                    </div>
-                    <div className="bg-white/10 h-px w-full" />
-                    <Button
-                      className="w-full text-black border-0 bg-white/90 h-10 sm:h-11 hover:text-black hover:bg-white/50 font-light tracking-wider uppercase text-xs sm:text-sm cursor-pointer"
-                      onClick={() => handleCloseConfirmModal()}
-                    >
-                      {t("hero.confirm")}
-                    </Button>
-                  </div>
-                </PopoverContent>
-              </Popover>
-            </div>
-          </div>
+          <PopoverGuest
+            guests={guests}
+            setGuests={setGuests}
+            animals={animals}
+            setAnimals={setAnimals}
+            open={guestsPopoverOpen}
+            onOpenChange={setGuestsPopoverOpen}
+            className="p-0!"
+          />
 
           {/* Reserva Button */}
           <Button

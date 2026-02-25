@@ -6,6 +6,7 @@ import {
   AvatarImage,
 } from "@/app/components/ui/avatar";
 import StarRating from "./StarRating";
+import { cn } from "@/lib/utils";
 
 export interface ReviewData {
   id: string;
@@ -59,7 +60,7 @@ const ReviewCard = ({ review, index }: ReviewCardProps) => {
 
   return (
     <div
-      className="rounded-2xl bg-white border border-neutral-200 p-4 shadow-sm min-h-[230px] max-h-[280px]"
+      className="rounded-2xl bg-white border border-neutral-200 px-4 pt-4 shadow-sm min-h-fit max-h-[280px]"
       style={{ animationDelay: `${index * 80}ms` }}
     >
       {/* Header: Avatar + Nome + Verificado + Data */}
@@ -85,7 +86,7 @@ const ReviewCard = ({ review, index }: ReviewCardProps) => {
                   {review.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs text-neutral-600 bg-neutral-100 border border-neutral-200 px-2.5 py-1 rounded-full"
+                      className={cn("text-xs px-2.5 py-1 rounded-full", tag === "Google" ? "bg-accent" : "bg-pink-600" )}
                     >
                       {tag}
                     </span>

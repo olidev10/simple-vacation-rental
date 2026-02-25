@@ -30,69 +30,96 @@ import {
 } from "./ui/select";
 import { Input } from "./ui/input";
 import { useTranslation } from "react-i18next";
+import { PopoverGuest } from "./PopoverGuest";
 
 const ReservationForm = () => {
   const { t, i18n } = useTranslation();
   const searchParams = useSearchParams();
+  // Estados de Formulário
   const [checkIn, setCheckIn] = useState<Date>();
   const [checkOut, setCheckOut] = useState<Date>();
   const [checkInTime, setCheckInTime] = useState<string>("");
   const [name, setName] = useState("");
-  const [guests, setGuests] = useState(1);
   const [hasTriedSubmit, setHasTriedSubmit] = useState(false);
+
+  const [guests, setGuests] = useState({
+    adultos: 1,
+    criancas: 0,
+    bebes: 0,
+  });
+  const [animals, setAnimals] = useState(0);
+  const [guestsPopoverOpen, setGuestsPopoverOpen] = useState(false);
 
   const numberWhatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   const locale = i18n.language === "en" ? enUS : ptBR;
 
   // Preencher campos a partir dos query params (vindos do BookingWidget no hero)
   useEffect(() => {
+    // 1. Captura os valores brutos da URL
+    const adultsParam = searchParams.get("adults");
+    const childrenParam = searchParams.get("children");
+    const babiesParam = searchParams.get("babies");
+    const animalsParam = searchParams.get("animals");
     const checkInParam = searchParams.get("checkIn");
     const checkOutParam = searchParams.get("checkOut");
-    const guestsParam = searchParams.get("guests");
-    let applied = false;
+  
+    // 2. Aplica os valores ao estado apenas se eles existirem
+    if (adultsParam || childrenParam || babiesParam) {
+      setGuests({
+        adultos: adultsParam ? parseInt(adultsParam, 10) : 1,
+        criancas: childrenParam ? parseInt(childrenParam, 10) : 0,
+        bebes: babiesParam ? parseInt(babiesParam, 10) : 0,
+      });
+    }
+  
+    if (animalsParam) {
+      setAnimals(parseInt(animalsParam, 10));
+    }
+  
     if (checkInParam) {
       const d = new Date(checkInParam);
-      if (!Number.isNaN(d.getTime())) {
-        setCheckIn(d);
-        applied = true;
-      }
+      if (!Number.isNaN(d.getTime())) setCheckIn(d);
     }
     if (checkOutParam) {
       const d = new Date(checkOutParam);
-      if (!Number.isNaN(d.getTime())) {
-        setCheckOut(d);
-        applied = true;
+      if (!Number.isNaN(d.getTime())) setCheckOut(d);
+    }
+  
+    // 3. Limpeza da URL preservando o ID da section (#reservation)
+    // Fazemos isso dentro de um pequeno timeout para garantir que o React processou o estado
+    const timeoutId = setTimeout(() => {
+      if (typeof window !== "undefined" && (adultsParam || checkInParam)) {
+        const url = new URL(window.location.href);
+        url.search = ""; // Remove todos os query params (?adults=3...)
+        url.hash = "reservation"; // Garante que o ID da section continue lá
+        window.history.replaceState(null, "", url.toString());
       }
-    }
-    if (guestsParam) {
-      const n = parseInt(guestsParam, 10);
-      if (Number.isInteger(n) && n >= 1 && n <= 10) {
-        setGuests(n);
-        applied = true;
-      }
-    }
-    if (applied && typeof window !== "undefined") {
-      window.history.replaceState(
-        null,
-        "",
-        window.location.pathname + (window.location.hash || ""),
-      );
-    }
+    }, 500); // 500ms é seguro para o React estabilizar o estado
+  
+    return () => clearTimeout(timeoutId);
   }, [searchParams]);
 
   const enviarWhatsApp = () => {
     const formatarData = (data: Date | undefined) => {
-      if (!data) return "";
+      if (!data) return "---";
       return format(new Date(data), "dd/MM/yyyy", { locale });
     };
 
+    const totalHospedes = guests.adultos + guests.criancas;
+
     const mensagem =
-      `${t("reservation.whatsappMessage")}\n\n` +
+      `*${t("reservation.whatsappMessage")}*\n\n` +
       `*${t("reservation.messageName")}:* ${name}\n` +
       `*${t("reservation.messageCheckIn")}:* ${formatarData(checkIn)}\n` +
       `*${t("reservation.messageCheckOut")}:* ${formatarData(checkOut)}\n` +
       `*${t("reservation.messageTime")}:* ${checkInTime}\n` +
-      `*${t("reservation.messageGuests")}:* ${guests}`;
+      `*Detalhes da Reserva:*\n` +
+      `- Adultos: ${guests.adultos}\n` +
+      `- Crianças: ${guests.criancas}\n` +
+      `- Bebês: ${guests.bebes}\n` +
+      `- Animais: ${animals}\n` +
+      `--------------------------\n` +
+      `*Total de Pessoas:* ${totalHospedes}`;
 
     const url = `https://wa.me/${numberWhatsapp}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
@@ -142,37 +169,20 @@ const ReservationForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setHasTriedSubmit(true);
-
-    const hasMissingFields =
-      !checkIn ||
-      !checkOut ||
-      !checkInTime ||
-      !name.trim() ||
-      !guests ||
-      guests < 1;
-
-    if (hasMissingFields) {
-      const defaultMessage =
-        i18n.language === "en"
-          ? "Please fill in all required fields."
-          : "Por favor, preencha todos os campos obrigatórios.";
-
-      const translated = t("reservation.requiredError");
-      const message =
-        translated === "reservation.requiredError"
-          ? defaultMessage
-          : translated;
-
-      alert(message);
+  
+    const isFormInvalid = 
+      !checkIn || 
+      !checkOut || 
+      !checkInTime || 
+      !name.trim() || 
+      guests.adultos < 1; // Validação correta para o objeto
+  
+    if (isFormInvalid) {
+      alert(t("reservation.requiredError") || "Preencha todos os campos.");
       return;
     }
-
+  
     enviarWhatsApp();
-    setCheckIn(undefined);
-    setCheckOut(undefined);
-    setCheckInTime("");
-    setName("");
-    setGuests(1);
   };
 
   return (
@@ -292,23 +302,19 @@ const ReservationForm = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="guests" className="reservation-label">
-                {t("reservation.guests")} *
-              </Label>
-              <div className="relative">
-                <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
-                <Input
-                  id="guests"
-                  type="number"
-                  min={1}
-                  max={10}
-                  placeholder={t("reservation.guestsPlaceholder")}
-                  value={guests}
-                  onChange={(e) => setGuests(Number(e.target.value))}
-                  className="pl-10 reservation-input border"
-                  required
-                />
-              </div>
+             
+              <PopoverGuest 
+                guests={guests}
+                setGuests={setGuests}
+                animals={animals}
+                setAnimals={setAnimals}
+                open={guestsPopoverOpen}
+                onOpenChange={setGuestsPopoverOpen}
+                divClassName="border-none"
+                className="border! bg-muted! border-border! w-full!"
+                background="bg-card!"
+                bgIcon="text-primary!"
+              />
             </div>
             <div />
             <div className="space-y-2">

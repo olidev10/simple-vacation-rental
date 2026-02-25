@@ -30,7 +30,7 @@ export function Rating() {
     <div className="min-h-[40rem]  flex flex-col antialiased items-center justify-center relative overflow-hidden bg-gray-200 py-16 lg:py-20">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12">
         <div className="text-center mb-3 sm:mb-4">
-          <p className="text-xs sm:text-sm uppercase tracking-wider text-primary font-medium">
+          <p className="text-xs sm:text-sm uppercase tracking-wider text-primary font-semibold">
             {t("reviews.sectionLabel")}
           </p>
         </div>

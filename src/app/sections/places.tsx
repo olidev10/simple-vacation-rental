@@ -40,11 +40,14 @@ export function Places() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <p className="text-sm uppercase tracking-wider text-primary font-medium mb-4">
+          <p className="text-sm uppercase tracking-wider text-primary font-semibold mb-4">
             {t("places.title")}
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-bold text-accent-foreground">
             {t("places.subtitle")}
+          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-primary">
+            {t("places.description")}
           </h2>
         </div>
 

@@ -45,7 +45,8 @@ const resources = {
       },
       amenities: {
         title: "Comodidades",
-        subtitle: "Tudo para seu Conforto",
+        subtitle: "Tudo Para Seu",
+        description: "Conforto",
         pool: "Piscina Privativa",
         poolDesc:
           "Aproveite uma piscina exclusiva com iluminação LED moderna, perfeita para relaxar a qualquer hora do dia ou da noite.",
@@ -77,57 +78,66 @@ const resources = {
         sectionTitleHighlight: "Casa de Praia",
         sectionDescription: "Descubra cada detalhe dos nossos espaços",
         title: "Galeria de Fotos",
-        subtitle: "Conheça Nossa Casa",
-        cards: {
-          pool: {
-            title: "Piscina",
-            desc: "Piscina privativa de 5m com iluminação LED e área de descanso lateral. O local perfeito para relaxar sob o sol com total privacidade.",
+        subtitle: "Conheça Nossa ",
+        subtitle2: "Casa de Praia",
+        description: "Cada detalhe pensado para proporcionar férias inesquecíveis",
+        showLess: "Exibir mais",
+        showMore: "Exibir menos",
+        photos: {
+          showMore: "Ver mais",
+          showLess: "Ver menos",
+          "images": {
+          "1": {
+            "title": "Piscina",
+            "alt": "Piscina privativa de 5m com iluminação LED e área de descanso lateral"
           },
-          decoration: {
-            title: "Decoração",
-            desc: "Ambiente instagramável unindo jardim artificial e iluminação RGB. O cenário ideal para garantir as melhores fotos de suas férias.",
+          "2": {
+            "title": "Decoração",
+            "alt": "Ambiente instagramável com jardim artificial e iluminação RGB"
           },
-          external: {
-            title: "Área Externa",
-            desc: "Espaço amplo com piscina e cascata relaxante. Planejado para proporcionar momentos de lazer inesquecíveis em família.",
+          "3": {
+            "title": "Área Externa",
+            "alt": "Espaço amplo com piscina e cascata relaxante para lazer em família"
           },
-          lateral: {
-            title: "Privacidade",
-            desc: "Casa de esquina garantindo maior ventilação e privacidade. Segurança total com câmeras 24h e monitoramento perimetral.",
+          "4": {
+            "title": "Privacidade",
+            "alt": "Casa de esquina com maior ventilação, câmeras 24h e monitoramento"
           },
-          garage: {
-            title: "Garagem",
-            desc: "Estacionamento privativo com 3 vagas seguras. Tranquilidade para guardar seus veículos dentro da propriedade durante a estadia.",
+          "5": {
+            "title": "Garagem",
+            "alt": "Estacionamento privativo com 3 vagas seguras dentro da propriedade"
           },
-          living: {
-            title: "Sala de Estar",
-            desc: 'Sala aconchegante com Smart TV de 50" e sofá-cama. Ambiente integrado perfeito para relaxar após um dia intenso de praia.',
+          "6": {
+            "title": "Sala de Estar",
+            "alt": "Sala aconchegante com Smart TV 50 polegadas e sofá-cama"
           },
-          gourmet: {
-            title: "Espaço Gourmet",
-            desc: "Área de churrasco equipada e integrada ao lazer. Tudo o que você precisa para preparar almoços especiais ao lado da piscina.",
+          "7": {
+            "title": "Espaço Gourmet",
+            "alt": "Área de churrasco equipada integrada à área de lazer"
           },
-          kitchen: {
-            title: "Cozinha",
-            desc: "Cozinha funcional com geladeira, cooktop e utensílios completos. Praticidade total para preparar desde o café até jantares elaborados.",
+          "8": {
+            "title": "Cozinha",
+            "alt": "Cozinha funcional com geladeira, cooktop e utensílios completos"
           },
-          bathroom: {
-            title: "Banheiros",
-            desc: "Casa com 2 banheiros modernos e lavabo social. Equipados com água quente e chuveiros de alta pressão para seu total conforto.",
+          "9": {
+            "title": "Banheiros",
+            "alt": "Casa com 2 banheiros modernos e lavabo social com água quente"
           },
-          room1: {
-            title: "Quarto 1",
-            desc: "Suíte master versátil com 1 cama de casal e 2 de solteiro. Conforto térmico garantido com ventilador de teto silencioso.",
+          "10": {
+            "title": "Quarto 1",
+            "alt": "Suíte master com cama de casal e camas de solteiro"
           },
-          room2: {
-            title: "Quarto 2",
-            desc: "Segunda suíte privativa com acomodações flexíveis e ótima iluminação. O refúgio ideal para uma noite de sono restauradora.",
-          },
-        },
+          "11": {
+            "title": "Quarto 2",
+            "alt": "Segunda suíte privativa com ótima iluminação e conforto"
+          }
+        }
+      }
       },
       places: {
         title: "Pontos Turísticos",
-        subtitle: "Belas praias e rica cultura a poucos minutos de distância",
+        subtitle: "Belas Praias e Rica Cultura a Poucos",
+        description: "Minutos de Distância",
         dragHint: "Arraste para explorar os pontos turísticos da região",
         items: {
           camaAnchieta: "Cama de Anchieta",
@@ -153,7 +163,7 @@ const resources = {
         reviews_count: "avaliações",
         verified: "Avaliações verificadas no Google",
         viewAll: "Ver Todas as Avaliações",
-        viewMoreOnAirbnb: "Veja todas no Airbnb",
+        viewMoreOnAirbnb: "Ver todas no Airbnb",
         google: "Google",
         airbnb: "Airbnb",
         loading: "Carregando avaliações do Google...",
@@ -199,6 +209,7 @@ const resources = {
         evening: "Noite (18:00 - 22:00)",
         yourName: "Seu Nome",
         namePlaceholder: "Digite seu nome",
+        messagePleaceholder: "Conte-nos mais sobre sua viagem, datas desejadas, etc.",
         guestsPlaceholder: "Quantidade",
         submit: "Solicitar Orçamento",
         whatsappNote: "Você será redirecionado para o WhatsApp",
@@ -249,7 +260,8 @@ const resources = {
       },
       amenities: {
         title: "Amenities",
-        subtitle: "Everything for Your Comfort",
+        subtitle: "Everything for Your",
+        description: "Comfort",
         pool: "Private Pool",
         poolDesc:
           "Enjoy an exclusive pool with modern LED lighting, perfect for relaxing at any time of the day or night.",
@@ -281,7 +293,11 @@ const resources = {
         sectionTitleHighlight: "Beach House",
         sectionDescription: "Discover every detail of our spaces",
         title: "Photo Gallery",
-        subtitle: "Discover Our House",
+        subtitle: "Discover ",
+        subtitle2: "Our House",
+        description: "Every detail designed to provide an unforgettable vacation",
+        showLess: "Show less",
+        showMore: "Show more",
         cards: {
           pool: {
             title: "Pool",
