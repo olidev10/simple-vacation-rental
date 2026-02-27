@@ -38,17 +38,21 @@ export function Places() {
   return (
     <section className="py-16 lg:py-20 bg-gradient-to-b from-white via-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <p className="text-sm uppercase tracking-wider text-primary font-semibold mb-4">
+        
+
+        <div className="text-center mb-16">
+          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
             {t("places.title")}
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-accent-foreground">
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-accent-foreground mb-4">
             {t("places.subtitle")}
-          </h2>
-          <h2 className="text-4xl md:text-5xl font-bold text-primary">
+            <span className="text-transparent bg-clip-text bg-gradient-ocean">
             {t("places.description")}
+            </span>
           </h2>
+          <p className="text-gray-600 not-odd:text-text-lg max-w-2xl mx-auto">
+            {t("places.dragHint")}
+          </p>
         </div>
 
         {/* Gallery */}
@@ -62,11 +66,6 @@ export function Places() {
           scrollSpeed={1.8}
         />
 
-        <div className="py-8 text-center">
-          <p className="text-sm text-gray-500">
-            {t("places.dragHint")}
-          </p>
-        </div>
       </div>
     </section>
   );

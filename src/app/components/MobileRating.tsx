@@ -83,28 +83,28 @@ export function MobileRating() {
 
   return (
     <div className="px-4 py-4 space-y-4 bg-gray-200">
-      <div className="text-center mb-3 sm:mb-4">
-        <p className="text-xs sm:text-sm uppercase tracking-wider text-primary font-medium">
-          {t("reviews.sectionLabel")}
-        </p>
-      </div>
 
-      <div className="text-center mb-3 sm:mb-4">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">
-          <span className="text-gray-900">{t("reviews.titlePrefix")}</span>
-          <span className="text-primary">{t("reviews.titleHighlight")}</span>
-        </h2>
-      </div>
-
-      <div className="text-center mb-6 sm:mb-8">
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-          {t("reviews.introBefore")}
-          <span className="font-bold">
-            <CountUp end={10} duration={2} />
+      <div className="text-center mb-16">
+          <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-3">
+            {t("reviews.sectionLabel")}
           </span>
-          {t("reviews.introAfter")}
-        </p>
-      </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-accent-foreground mb-4">
+            {t("reviews.titlePrefix")}
+            <span className="text-transparent bg-clip-text bg-gradient-ocean">
+            {t("reviews.titleHighlight")}
+            </span>
+          </h2>
+          
+          <div className="mx-auto">
+            <p className="text-gray-600 not-odd:text-text-lg max-w-2xl ">
+              {t("reviews.introBefore")}
+              <span className="font-bold">
+                <CountUp end={10} duration={2} />
+              </span>
+              {t("reviews.introAfter")}
+            </p>
+        </div>
+        </div>
 
       <RatingSummary
         average={rating}

@@ -45,7 +45,7 @@ const resources = {
       },
       amenities: {
         title: "Comodidades",
-        subtitle: "Tudo Para Seu",
+        subtitle: "Tudo Para Seu ",
         description: "Conforto",
         pool: "Piscina Privativa",
         poolDesc:
@@ -136,7 +136,7 @@ const resources = {
       },
       places: {
         title: "Pontos Turísticos",
-        subtitle: "Belas Praias e Rica Cultura a Poucos",
+        subtitle: "Belas Praias e Rica Cultura a Poucos ",
         description: "Minutos de Distância",
         dragHint: "Arraste para explorar os pontos turísticos da região",
         items: {
@@ -260,7 +260,7 @@ const resources = {
       },
       amenities: {
         title: "Amenities",
-        subtitle: "Everything for Your",
+        subtitle: "Everything for Your ",
         description: "Comfort",
         pool: "Private Pool",
         poolDesc:
@@ -347,7 +347,7 @@ const resources = {
       },
       places: {
         title: "Tourist Places",
-        subtitle: "Beautiful Beaches and Rich Culture a Few Minutes Away",
+        subtitle: "Beautiful Beaches and Rich Culture a Few Minutes Away ",
         dragHint: "Drag to explore the region's tourist spots",
         items: {
           camaAnchieta: "Cama de Anchieta",
