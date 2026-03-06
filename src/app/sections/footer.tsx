@@ -30,11 +30,11 @@ export function Footer() {
           <div className="space-y-4">
             <img
               src="/logo_beach_house.png"
-              alt="Botelho Beach House"
+              alt="Place To Be"
               className="w-28 mb-2"
             />
             <h2 className="text-2xl font-bold text-[#3fbbd0] mb-3">
-              Botelho Beach House
+              Place To Be
             </h2>
             <p className="text-white/90 leading-relaxed text-sm">
               {t("footer.tagline")}
@@ -45,27 +45,27 @@ export function Footer() {
             <h3 className="text-xl font-bold text-white mb-4">{t("footer.quickLinks")}</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#inicio" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a href="#home" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
                   {t("footer.home")}
                 </a>
               </li>
               <li>
-                <a href="#fotos" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a href="#photos" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
                   {t("footer.photos")}
                 </a>
               </li>
               <li>
-                <a href="#comodidades" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a href="#amenities" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
                   {t("footer.amenities")}
                 </a>
               </li>
               <li>
-                <a href="#avaliacoes" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a href="#reviews" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
                   {t("footer.reviews")}
                 </a>
               </li>
               <li>
-                <a href="#reservar" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a href="#reserve" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
                   {t("footer.reserve")}
                 </a>
               </li>
@@ -78,41 +78,19 @@ export function Footer() {
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-white/90 text-sm">
-                <Phone className="h-5 w-5 mt-0.5 flex-shrink-0 text-white" />
-                <a
-                  href="tel:+5511934905837"
-                  className="hover:text-white transition-colors duration-300"
-                >
-                  (11) 93490-5837
-                </a>
-              </li>
-              <li className="flex items-start gap-3 text-white/90 text-sm">
                 <Mail className="h-5 w-5 mt-0.5 flex-shrink-0 text-white" />
                 <a
-                  href="mailto:beachhousepix@gmail.com"
+                  href="mailto:contact.olidev@gmail.com"
                   className="hover:text-white transition-colors duration-300"
                 >
-                  beachhousepix@gmail.com
+                  contact.olidev@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3 text-white/90 text-sm">
                 <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0 text-white" />
                 <span>
-                  Praia Itanhaém
-                  <br />
-                  Litoral Sul, SP
+                  Bordeaux, France
                 </span>
-              </li>
-              <li className="flex items-start gap-3 text-white/90 text-sm">
-                <Instagram className="h-5 w-5 text-white" />
-                <a
-                  href="https://www.instagram.com/botelhobeachhouse?igsh=ejd2cDd6ZmhrZmN0&utm_source=qr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors duration-300"
-                >
-                  @botelhobeachhouse
-                </a>
               </li>
             </ul>
           </div>
@@ -141,7 +119,7 @@ export function Footer() {
         <div className="border-t border-white/10 pt-6 sm:pt-8 mt-6 sm:mt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <p className="text-white/80 text-xs sm:text-sm text-center sm:text-left">
-              © {currentYear} Botelho Beach House. {t("footer.rights")}
+              © {currentYear} Place To Be. {t("footer.rights")}
             </p>
             <div className="flex items-center gap-1.5 sm:gap-2 text-white/80 text-xs sm:text-sm">
               <span>{t("footer.madeWith")}</span>

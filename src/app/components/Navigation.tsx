@@ -96,7 +96,7 @@ const Navigation = () => {
         <motion.h1
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-sm sm:text-lg lg:text-2xl font-light tracking-[0.2em] sm:tracking-[0.3em] italic hidden sm:block"
         >
-          Botelho Beach House
+          Place To Be
         </motion.h1>
 
         <div className="flex items-center gap-4 sm:gap-8">

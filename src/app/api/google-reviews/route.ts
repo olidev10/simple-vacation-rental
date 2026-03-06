@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Coordenadas do Botelho Beach House
+// Coordenadas do Place To Be
 const LAT = -24.1381194;
 const LNG = -46.7235046;
 const GOOGLE_API_KEY = process.env.GOOGLE_PLACES_API_KEY;
