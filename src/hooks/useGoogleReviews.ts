@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { airbnbReviews, AirbnbReview } from "@/data/airbnbReviews";
 
 export interface Review {
   quote: string;
@@ -8,7 +7,7 @@ export interface Review {
   rating: number;
   time?: number;
   profilePhoto?: string;
-  source?: 'google' | 'airbnb';
+  source?: "google";
   date?: string;
 }
 
@@ -75,16 +74,13 @@ export function useGoogleReviews() {
   const [totalReviews, setTotalReviews] = useState(0);
   const [googleRating, setGoogleRating] = useState(0);
   const [googleTotal, setGoogleTotal] = useState(0);
-  const [airbnbRating, setAirbnbRating] = useState(5.0);
-  const [airbnbTotal, setAirbnbTotal] = useState(airbnbReviews.length);
 
-  // Busca as avaliações do Google
   const { data, isLoading, error } = useQuery<GoogleReviewsData>({
-    queryKey: ['google-reviews'],
+    queryKey: ["google-reviews"],
     queryFn: async () => {
-      const response = await fetch('/api/google-reviews');
+      const response = await fetch("/api/google-reviews");
       if (!response.ok) {
-        throw new Error('Erro ao buscar avaliações');
+        throw new Error("Failed to fetch Google reviews");
       }
       return response.json();
     },
@@ -92,61 +88,35 @@ export function useGoogleReviews() {
     refetchOnWindowFocus: false,
   });
 
-  // Combina avaliações do Google e Airbnb
   useEffect(() => {
-    // Converte avaliações do Airbnb para o formato padrão
-    const airbnbFormatted: Review[] = airbnbReviews.map((review) => ({
-      quote: review.quote,
-      name: review.name,
-      rating: review.rating,
-      source: 'airbnb' as const,
-      date: review.date,
-    }));
-
-    // Calcula rating médio do Airbnb
-    const airbnbAvg = airbnbReviews.reduce((acc, r) => acc + r.rating, 0) / airbnbReviews.length;
-    setAirbnbRating(airbnbAvg);
-    setAirbnbTotal(airbnbReviews.length);
-
     if (data && data.reviews && data.reviews.length > 0) {
-      // Marca avaliações do Google com a source
       const googleFormatted: Review[] = data.reviews.map((review) => ({
         ...review,
-        source: 'google' as const,
+        source: "google" as const,
       }));
 
-      // Combina avaliações do Google + Airbnb
-      const allReviews = [...googleFormatted, ...airbnbFormatted];
-      
-      // Embaralha as avaliações para misturar as fontes
-      const shuffled = allReviews.sort(() => Math.random() - 0.5);
-      
-      setReviews(shuffled);
+      setReviews(googleFormatted);
       setGoogleRating(data.rating);
       setGoogleTotal(data.totalReviews);
-
-      // Calcula rating médio geral (ponderado)
-      const totalCount = data.totalReviews + airbnbReviews.length;
-      const weightedRating = 
-        (data.rating * data.totalReviews + airbnbAvg * airbnbReviews.length) / totalCount;
-      
-      setRating(weightedRating);
-      setTotalReviews(totalCount);
+      setRating(data.rating);
+      setTotalReviews(data.totalReviews);
     } else if (error) {
-      // Fallback: usa apenas avaliações locais (testimonials) se Google falhar
-      console.warn('Usando avaliações locais como fallback');
+      console.warn("Using local reviews as fallback");
       const localFormatted: Review[] = testimonials.map((review) => ({
         ...review,
-        source: 'airbnb' as const,
+        source: "google" as const,
       }));
       setReviews(localFormatted);
       setRating(5.0);
       setTotalReviews(testimonials.length);
+      setGoogleRating(5.0);
+      setGoogleTotal(testimonials.length);
     } else {
-      // Enquanto carrega Google, mostra apenas Airbnb
-      setReviews(airbnbFormatted);
-      setRating(airbnbAvg);
-      setTotalReviews(airbnbReviews.length);
+      setReviews([]);
+      setRating(5.0);
+      setTotalReviews(0);
+      setGoogleRating(0);
+      setGoogleTotal(0);
     }
   }, [data, error]);
 
@@ -156,8 +126,6 @@ export function useGoogleReviews() {
     totalReviews,
     googleRating,
     googleTotal,
-    airbnbRating,
-    airbnbTotal,
     isLoading,
     error,
   };

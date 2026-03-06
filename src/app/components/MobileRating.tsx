@@ -6,9 +6,8 @@ import ReviewCard, { ReviewData } from "./ReviewCard";
 import { useGoogleReviews } from "@/hooks/useGoogleReviews";
 import { useTranslation } from "react-i18next";
 import CountUp from "./ui/count-up";
-
-const AIRBNB_REVIEWS_URL =
-  "https://www.airbnb.com.br/rooms/1358899180534366297/reviews";
+const GOOGLE_REVIEWS_URL =
+"https://www.google.com/maps/place/Residhotel+Galerie+Tatry/@44.8630439,-0.573862,18z/data=!4m9!3m8!1s0xd552866000c98d1:0x301cff1feb5bc9bc!5m2!4m1!1i2!8m2!3d44.8630419!4d-0.5742081!16s%2Fg%2F1tftsdrr?entry=ttu&g_ep=EgoyMDI2MDMwMi4wIKXMDSoASAFQAw%3D%3D";
 
 const MAX_REVIEWS_DISPLAY = 10;
 
@@ -57,10 +56,8 @@ export function MobileRating() {
             : review.quote || "",
         comment: review.quote || "",
         helpful: 0,
-        verified: review.source === "airbnb",
-        tags: review.source
-          ? [review.source === "airbnb" ? "Airbnb" : "Google"]
-          : undefined,
+        verified: review.source === "google",
+        tags: review.source ? ["Google"] : undefined,
         sortTimestamp: getSortTimestamp(review),
       };
     });
@@ -126,12 +123,12 @@ export function MobileRating() {
             ))}
             <div className="flex justify-center pt-4">
               <Link
-                href={AIRBNB_REVIEWS_URL}
+                href={GOOGLE_REVIEWS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-ocean text-white  hover:opacity-90 transition-opacit text-sm font-medium hover:bg-primary/90 transition-colors shadow-sm"
               >
-                {t("reviews.viewMoreOnAirbnb")}
+                {t("reviews.viewAll")}
                 <ExternalLink size={16} />
               </Link>
             </div>

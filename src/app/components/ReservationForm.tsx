@@ -9,13 +9,10 @@ import {
   User,
   Send,
   Sun,
-  Users,
   Moon,
   MapPin,
   Clock,
 } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { getAirbnbCalendar, type Booking } from "@/lib/airbnbCalendar";
 import { cn } from "@/lib/utils";
 import { Label } from "./ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -43,9 +40,9 @@ const ReservationForm = () => {
   const [hasTriedSubmit, setHasTriedSubmit] = useState(false);
 
   const [guests, setGuests] = useState({
-    adultos: 1,
-    criancas: 0,
-    bebes: 0,
+    adults: 1,
+    children: 0,
+    babies: 0,
   });
   const [animals, setAnimals] = useState(0);
   const [guestsPopoverOpen, setGuestsPopoverOpen] = useState(false);
@@ -66,9 +63,9 @@ const ReservationForm = () => {
     // 2. Aplica os valores ao estado apenas se eles existirem
     if (adultsParam || childrenParam || babiesParam) {
       setGuests({
-        adultos: adultsParam ? parseInt(adultsParam, 10) : 1,
-        criancas: childrenParam ? parseInt(childrenParam, 10) : 0,
-        bebes: babiesParam ? parseInt(babiesParam, 10) : 0,
+        adults: adultsParam ? parseInt(adultsParam, 10) : 1,
+        children: childrenParam ? parseInt(childrenParam, 10) : 0,
+        babies: babiesParam ? parseInt(babiesParam, 10) : 0,
       });
     }
   
@@ -99,13 +96,13 @@ const ReservationForm = () => {
     return () => clearTimeout(timeoutId);
   }, [searchParams]);
 
-  const enviarWhatsApp = () => {
+  const sendWhatsApp = () => {
     const formatarData = (data: Date | undefined) => {
       if (!data) return "---";
       return format(new Date(data), "dd/MM/yyyy", { locale });
     };
 
-    const totalHospedes = guests.adultos + guests.criancas;
+    const totalHospedes = guests.adults + guests.children;
 
     const mensagem =
       `*${t("reservation.whatsappMessage")}*\n\n` +
@@ -113,40 +110,16 @@ const ReservationForm = () => {
       `*${t("reservation.messageCheckIn")}:* ${formatarData(checkIn)}\n` +
       `*${t("reservation.messageCheckOut")}:* ${formatarData(checkOut)}\n` +
       `*${t("reservation.messageTime")}:* ${checkInTime}\n` +
-      `*Detalhes da Reserva:*\n` +
-      `- Adultos: ${guests.adultos}\n` +
-      `- Crianças: ${guests.criancas}\n` +
-      `- Bebês: ${guests.bebes}\n` +
-      `- Animais: ${animals}\n` +
+      `*Reservation Details:*\n` +
+      `- Adults: ${guests.adults}\n` +
+      `- children: ${guests.children}\n` +
+      `- Babies: ${guests.babies}\n` +
+      `- Animals: ${animals}\n` +
       `--------------------------\n` +
-      `*Total de Pessoas:* ${totalHospedes}`;
+      `*Total of People:* ${totalHospedes}`;
 
     const url = `https://wa.me/${numberWhatsapp}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
-  };
-
-  const { data: bookings = [] } = useQuery<Booking[]>({
-    queryKey: ["airbnb-calendar"],
-    queryFn: getAirbnbCalendar,
-    staleTime: 30 * 60 * 1000,
-    gcTime: 60 * 60 * 1000,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    retry: 2,
-  });
-
-  const isDateBooked = (date: Date): boolean => {
-    if (bookings.length === 0) return false;
-    const dateToCheck = new Date(date);
-    dateToCheck.setHours(0, 0, 0, 0);
-    return bookings.some((booking) => {
-      const bookingStart = new Date(booking.start);
-      bookingStart.setHours(0, 0, 0, 0);
-      const bookingEnd = new Date(booking.end);
-      bookingEnd.setHours(0, 0, 0, 0);
-      return dateToCheck >= bookingStart && dateToCheck < bookingEnd;
-    });
   };
 
   const disabledDates = (date: Date): boolean => {
@@ -154,7 +127,7 @@ const ReservationForm = () => {
     today.setHours(0, 0, 0, 0);
     const dateToCheck = new Date(date);
     dateToCheck.setHours(0, 0, 0, 0);
-    return dateToCheck < today || isDateBooked(date);
+    return dateToCheck < today;
   };
 
   const disabledCheckOutDates = (date: Date): boolean => {
@@ -163,7 +136,7 @@ const ReservationForm = () => {
     d.setHours(0, 0, 0, 0);
     const min = new Date(minDate);
     min.setHours(0, 0, 0, 0);
-    return d < min || isDateBooked(date);
+    return d < min;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -175,14 +148,14 @@ const ReservationForm = () => {
       !checkOut || 
       !checkInTime || 
       !name.trim() || 
-      guests.adultos < 1; // Validação correta para o objeto
+      guests.adults < 1; // Verify at least 1 adult is selected
   
     if (isFormInvalid) {
       alert(t("reservation.requiredError") || "Please fill all required fields.");
       return;
     }
   
-    enviarWhatsApp();
+    sendWhatsApp();
   };
 
   return (

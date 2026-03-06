@@ -6,7 +6,6 @@ Landing page for a seasonal beach-house rental in Itanhaem (Sao Paulo coast), bu
 
 - Responsive marketing site with dedicated sections (hero, photos, amenities, nearby places, reservation, reviews)
 - Reservation flow that builds a pre-filled WhatsApp message
-- Airbnb availability integration via private iCal (ICS) URL
 - Google Reviews integration via Places API
 - Internationalization (`fr` and `en`) with `i18next`
 - SEO setup (metadata, Open Graph, `sitemap`, `robots`)
@@ -48,16 +47,12 @@ NEXT_PUBLIC_SITE_URL=https://botelhobeachhouse.com
 # Google Places API key (used by /api/google-reviews)
 GOOGLE_PLACES_API_KEY=your_google_api_key
 
-# Private Airbnb iCal export URL (used by /api/airbnb-calendar)
-URL_SECRET_ICS=https://www.airbnb.com/calendar/ical/....ics?s=...
-
 # WhatsApp number for reservation CTA (numbers only, country code included)
 NEXT_PUBLIC_WHATSAPP_NUMBER=5511999999999
 ```
 
 Notes:
 - `GOOGLE_PLACES_API_KEY` is required for live Google reviews.
-- `URL_SECRET_ICS` is required for availability/blocked dates.
 - `NEXT_PUBLIC_WHATSAPP_NUMBER` is required for the reservation form CTA.
 
 ## Available Scripts
@@ -75,17 +70,12 @@ pnpm lint   # lint with Next.js ESLint config
   - Fetches Google Place details + reviews for the configured location.
   - Returns `{ rating, totalReviews, reviews[] }`.
 
-- `GET /api/airbnb-calendar`
-  - Fetches and parses the ICS file from `URL_SECRET_ICS`.
-  - Returns reservation ranges used to disable dates in the booking UI.
-
 ## Project Structure
 
 ```text
 src/
   app/
     api/
-      airbnb-calendar/
       google-reviews/
     components/
     providers/

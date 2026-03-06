@@ -9,9 +9,9 @@ import { ButtonRounded } from "./ButtonRounded";
 import { cn } from "@/lib/utils";
 
 interface Guests {
-  adultos: number;
-  criancas: number;
-  bebes: number;
+  adults: number;
+  children: number;
+  babies: number;
 }
 
 interface GuestsPickerProps {
@@ -40,7 +40,7 @@ export const PopoverGuest = ({
   bgIcon,
 }: GuestsPickerProps) => {
   const { t } = useTranslation();
-  const totalGuests = guests.adultos + guests.criancas;
+  const totalGuests = guests.adults + guests.children;
 
   return (
     <div className="w-full md:w-auto">
@@ -69,7 +69,7 @@ export const PopoverGuest = ({
           </PopoverTrigger>
           <PopoverContent className={cn(background,"w-[calc(100vw-2rem)] sm:w-80 bg-[#03303E]/70 backdrop-blur-xl border-none rounded-lg shadow-2xl")}>
             <div className="space-y-4">
-              {/* Adultos */}
+              {/* adults */}
               <div className="flex items-center justify-between py-1">
                 <div className="flex flex-col">
                     <Label className="text-white font-semibold text-base">{t("hero.adults")}</Label>
@@ -78,13 +78,13 @@ export const PopoverGuest = ({
                 <div className="flex items-center gap-3">
                   <ButtonRounded
                     icon={<Minus className="h-4 w-4" />}
-                    onClick={() => setGuests((prev) => ({ ...prev, adultos: Math.max(0, prev.adultos - 1) }))}
-                    disabled={guests.adultos === 0}
+                    onClick={() => setGuests((prev) => ({ ...prev, adults: Math.max(0, prev.adults - 1) }))}
+                    disabled={guests.adults === 0}
                   />
-                  <span className="w-10 text-center text-white font-semibold text-lg">{guests.adultos}</span>
+                  <span className="w-10 text-center text-white font-semibold text-lg">{guests.adults}</span>
                   <ButtonRounded
                     icon={<Plus className="h-4 w-4" />}
-                    onClick={() => setGuests((prev) => ({ ...prev, adultos: prev.adultos + 1 }))}
+                    onClick={() => setGuests((prev) => ({ ...prev, adults: prev.adults + 1 }))}
                     disabled={totalGuests >= 10}
                   />
                 </div>
@@ -99,13 +99,13 @@ export const PopoverGuest = ({
                 <div className="flex items-center gap-3">
                   <ButtonRounded
                     icon={<Minus className="h-4 w-4" />}
-                    onClick={() => setGuests((prev) => ({ ...prev, criancas: Math.max(0, prev.criancas - 1) }))}
-                    disabled={guests.criancas === 0}
+                    onClick={() => setGuests((prev) => ({ ...prev, children: Math.max(0, prev.children - 1) }))}
+                    disabled={guests.children === 0}
                   />
-                  <span className="w-10 text-center text-white font-semibold text-lg">{guests.criancas}</span>
+                  <span className="w-10 text-center text-white font-semibold text-lg">{guests.children}</span>
                   <ButtonRounded
                     icon={<Plus className="h-4 w-4" />}
-                    onClick={() => setGuests((prev) => ({ ...prev, criancas: prev.criancas + 1 }))}
+                    onClick={() => setGuests((prev) => ({ ...prev, children: prev.children + 1 }))}
                     disabled={totalGuests >= 10}
                   />
                 </div>
@@ -120,13 +120,13 @@ export const PopoverGuest = ({
                 <div className="flex items-center gap-3">
                   <ButtonRounded
                     icon={<Minus className="h-4 w-4" />}
-                    onClick={() => setGuests((prev) => ({ ...prev, bebes: Math.max(0, prev.bebes - 1) }))}
-                    disabled={guests.bebes === 0}
+                    onClick={() => setGuests((prev) => ({ ...prev, babies: Math.max(0, prev.babies - 1) }))}
+                    disabled={guests.babies === 0}
                   />
-                  <span className="w-10 text-center text-white font-semibold text-lg">{guests.bebes}</span>
+                  <span className="w-10 text-center text-white font-semibold text-lg">{guests.babies}</span>
                   <ButtonRounded
                     icon={<Plus className="h-4 w-4" />}
-                    onClick={() => setGuests((prev) => ({ ...prev, bebes: prev.bebes + 1 }))}
+                    onClick={() => setGuests((prev) => ({ ...prev, babies: prev.babies + 1 }))}
                   />
                 </div>
               </div>

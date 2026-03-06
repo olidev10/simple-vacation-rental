@@ -8,9 +8,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
 const GOOGLE_MAPS_LINK =
-  "https://www.google.com/maps/place/Botelho+Beach+House/@-24.1381194,-46.7260795,17z/data=!4m8!3m7!1s0x94ce2900572eff73:0x6602e03209e3f4ff!8m2!3d-24.1381194!4d-46.7235046!9m1!1b1!16s%2Fg%2F11m75w7jmy?entry=ttu&g_ep=EgoyMDI2MDEyOC4wIKXMDSoASAFQAw%3D%3D";
-const AIRBNB_LINK =
-  "https://www.airbnb.com.br/rooms/1358899180534366297/reviews?photo_id=2091219424&source_impression_id=p3_1769961819_P385MsgB7dN0kRLw&previous_page_section_name=1000";
+"https://www.google.com/maps/place/Residhotel+Galerie+Tatry/@44.8630439,-0.573862,18.44z/data=!4m18!1m8!3m7!1s0xd55286605d8579b:0xf400ef4e7f018ac4!2s151+Cr+du+M%C3%A9doc,+33300+Bordeaux!3b1!8m2!3d44.8634536!4d-0.5725778!16s%2Fg%2F11pw1xwvqq!3m8!1s0xd552866000c98d1:0x301cff1feb5bc9bc!5m2!4m1!1i2!8m2!3d44.8630419!4d-0.5742081!16s%2Fg%2F1tftsdrr?entry=ttu&g_ep=EgoyMDI2MDMwMi4wIKXMDSoASAFQAw%3D%3D";
 
 export function Rating() {
   const { t } = useTranslation();
@@ -20,8 +18,6 @@ export function Rating() {
     totalReviews,
     googleRating,
     googleTotal,
-    airbnbRating,
-    airbnbTotal,
     isLoading,
     error,
   } = useGoogleReviews();
@@ -74,7 +70,6 @@ export function Rating() {
               {t("reviews.based")} {totalReviews} {t("reviews.reviewsCount")}
             </p>
 
-            {/* Estatísticas por plataforma */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
               {googleTotal > 0 && (
                 <Link
@@ -99,34 +94,6 @@ export function Rating() {
                     </div>
                     <div className="text-xs text-blue-600">
                       {googleTotal} {t("reviews.reviewsCount")}
-                    </div>
-                  </div>
-                </Link>
-              )}
-
-              {airbnbTotal > 0 && (
-                <Link
-                  href={AIRBNB_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-2 bg-pink-50 rounded-lg w-full sm:w-auto"
-                >
-                  <svg
-                    className="w-4 h-4 flex-shrink-0"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path
-                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-                      fill="#FF5A5F"
-                    />
-                  </svg>
-                  <div className="text-left flex-1">
-                    <div className="font-semibold text-pink-700 text-sm">
-                      {airbnbRating.toFixed(1).replace(".", ",")} · Airbnb
-                    </div>
-                    <div className="text-xs text-pink-600">
-                      {airbnbTotal} {t("reviews.reviewsCount")}
                     </div>
                   </div>
                 </Link>

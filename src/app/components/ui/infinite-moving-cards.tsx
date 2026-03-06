@@ -10,7 +10,7 @@ interface InfiniteMovingCardsProps {
     quote: string;
     name: string;
     rating: number;
-    source?: "google" | "airbnb";
+    source?: "google";
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
@@ -192,13 +192,10 @@ export const InfiniteMovingCards = ({
                       {item.source && (
                         <span
                           className={cn(
-                            "text-xs px-2 py-0.5 rounded-full font-medium",
-                            item.source === "google"
-                              ? "bg-blue-100 text-blue-700"
-                              : "bg-pink-100 text-pink-700",
+                            "text-xs px-2 py-0.5 rounded-full font-medium bg-blue-100 text-blue-700",
                           )}
                         >
-                          {item.source === "google" ? "Google" : "Airbnb"}
+                          Google
                         </span>
                       )}
                     </div>

@@ -18,8 +18,6 @@ import { useRouter } from "next/navigation";
 import { ButtonRounded } from "./ButtonRounded";
 import { enUS, fr } from "date-fns/locale";
 import type { DateRange } from "react-day-picker";
-import { useQuery } from "@tanstack/react-query";
-import { getAirbnbCalendar, type Booking } from "@/lib/airbnbCalendar";
 import { PopoverGuest } from "./PopoverGuest";
 
 const BookingWidget = () => {
@@ -30,65 +28,20 @@ const BookingWidget = () => {
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(undefined);
 
   const [guests, setGuests] = useState({
-    adultos: 0,
-    criancas: 0,
-    bebes: 0,
+    adults: 0,
+    children: 0,
+    babies: 0,
   });
   const [animals, setAnimals] = useState(0);
   const [guestsPopoverOpen, setGuestsPopoverOpen] = useState(false);
-  const totalGuests = guests.adultos + guests.criancas;
-
-  // Buscar reservas do Airbnb usando TanStack Query com cache de 30 minutos
-  const {
-    data: bookings = [],
-    isLoading: loadingBookings,
-    error: bookingsError,
-  } = useQuery<Booking[]>({
-    queryKey: ["airbnb-calendar"],
-    queryFn: getAirbnbCalendar,
-    staleTime: 30 * 60 * 1000,
-    gcTime: 60 * 60 * 1000,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    retry: 2,
-  });
-
-  if (bookingsError) {
-    console.error("❌ Erro ao buscar reservas:", bookingsError);
-  }
-
-  const isDateBooked = (date: Date): boolean => {
-    if (bookings.length === 0) return false;
-    const dateToCheck = new Date(date);
-    dateToCheck.setHours(0, 0, 0, 0);
-    return bookings.some((booking) => {
-      const bookingStart = new Date(booking.start);
-      bookingStart.setHours(0, 0, 0, 0);
-      const bookingEnd = new Date(booking.end);
-      bookingEnd.setHours(0, 0, 0, 0);
-      return dateToCheck >= bookingStart && dateToCheck < bookingEnd;
-    });
-  };
-
-  /** Retorna true se algum dia no intervalo [from, to) estiver bloqueado. */
-  const isRangeIncludingBookedDays = (from: Date, to: Date): boolean => {
-    const fromNorm = new Date(from);
-    fromNorm.setHours(0, 0, 0, 0);
-    const toNorm = new Date(to);
-    toNorm.setHours(0, 0, 0, 0);
-    for (const d = new Date(fromNorm); d < toNorm; d.setDate(d.getDate() + 1)) {
-      if (isDateBooked(d)) return true;
-    }
-    return false;
-  };
+  const totalGuests = guests.adults + guests.children;
 
   const disabledDates = (date: Date): boolean => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const dateToCheck = new Date(date);
     dateToCheck.setHours(0, 0, 0, 0);
-    return dateToCheck < today || isDateBooked(date);
+    return dateToCheck < today;
   };
 
   const handleCloseConfirmModal = () => {
@@ -101,9 +54,9 @@ const BookingWidget = () => {
     if (checkInDate) params.set("checkIn", checkInDate.toISOString());
     if (checkOutDate) params.set("checkOut", checkOutDate.toISOString());
     
-    if (guests.adultos > 0) params.set("adults", String(guests.adultos));
-    if (guests.criancas > 0) params.set("children", String(guests.criancas));
-    if (guests.bebes > 0) params.set("babies", String(guests.bebes));
+    if (guests.adults > 0) params.set("adults", String(guests.adults));
+    if (guests.children > 0) params.set("children", String(guests.children));
+    if (guests.babies > 0) params.set("babies", String(guests.babies));
     if (animals > 0) params.set("animals", String(animals));
   
     const query = params.toString();
@@ -179,15 +132,6 @@ const BookingWidget = () => {
                       }
                       disabled={disabledDates}
                       excludeDisabled
-                      modifiers={{ booked: (date) => isDateBooked(date) }}
-                      modifiersClassNames={{
-                        booked:
-                          "opacity-40 line-through cursor-not-allowed text-red-300/50",
-                      }}
-                      classNames={{
-                        day_disabled:
-                          "opacity-40 line-through cursor-not-allowed text-red-300",
-                      }}
                       onSelect={(range: DateRange | undefined) => {
                         if (range) {
                           const today = new Date();
@@ -196,18 +140,11 @@ const BookingWidget = () => {
                             const fromNorm = new Date(range.from);
                             fromNorm.setHours(0, 0, 0, 0);
                             if (fromNorm < today) return;
-                            if (isDateBooked(range.from)) return;
                           }
                           if (range.to) {
                             const toNorm = new Date(range.to);
                             toNorm.setHours(0, 0, 0, 0);
                             if (toNorm < today) return;
-                            if (isDateBooked(range.to)) return;
-                            if (
-                              range.from &&
-                              isRangeIncludingBookedDays(range.from, range.to)
-                            )
-                              return;
                           }
                           setCheckInDate(range.from);
                           setCheckOutDate(range.to ?? undefined);
