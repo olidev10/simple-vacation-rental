@@ -50,13 +50,13 @@ Create `.env.local` in the project root:
 
 ```env
 # Public canonical URL used by metadata/sitemap/robots
-NEXT_PUBLIC_SITE_URL=https://botelhobeachhouse.com
+NEXT_PUBLIC_SITE_URL=https://simple-vacation-rental.vercel.app
 
 # Google Places API key (used by /api/google-reviews)
 GOOGLE_PLACES_API_KEY=your_google_api_key
 
 # WhatsApp number for reservation CTA (numbers only, country code included)
-NEXT_PUBLIC_WHATSAPP_NUMBER=5511999999999
+NEXT_PUBLIC_WHATSAPP_NUMBER=330123456789
 ```
 
 Notes:

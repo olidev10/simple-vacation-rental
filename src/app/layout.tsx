@@ -5,7 +5,7 @@ import { QueryProvider } from "./providers/QueryProvider";
 import { I18nProvider } from "./providers/I18nProvider";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://botelhobeachhouse.com";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://simple-vacation-rental.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
