@@ -2,6 +2,14 @@
 
 Landing page for a seasonal beach-house rental in Itanhaem (Sao Paulo coast), built with Next.js App Router.
 
+## Demo Video
+
+<video src="./docs/demo.mov" controls muted playsinline width="100%">
+  Your browser does not support embedded videos.
+</video>
+
+If the video does not render on your GitHub view, use this direct file link: [docs/demo.mov](./docs/demo.mov).
+
 ## What This Project Includes
 
 - Responsive marketing site with dedicated sections (hero, photos, amenities, nearby places, reservation, reviews)
