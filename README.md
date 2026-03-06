@@ -1,6 +1,6 @@
-# Botelho Beach House (Place To Be)
+# Place To Be - Simple-vacation-rental
 
-Landing page for a seasonal beach-house rental in Itanhaem (Sao Paulo coast), built with Next.js App Router.
+Landing page for a vacation rental in , built with Next.js App Router.
 
 ## Demo Video
 
@@ -36,8 +36,8 @@ If the video does not render on your GitHub view, use this direct file link: [do
 ## Getting Started
 
 ```bash
-git clone <your-repo-url>
-cd botelho-beach-house
+git clone https://github.com/olidev10/simple-vacation-rental.git
+cd simple-vacation-rental
 pnpm install
 pnpm dev
 ```
