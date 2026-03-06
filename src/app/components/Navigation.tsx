@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 
 const Navigation = () => {
   const [hasBackground, setHasBackground] = useState(false);
-  const [currentLang, setCurrentLang] = useState('pt');
+  const [currentLang, setCurrentLang] = useState("fr");
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
@@ -36,10 +36,10 @@ const Navigation = () => {
 
   // ... (manter lógica de idioma conforme original) ...
   useEffect(() => {
-    setCurrentLang(i18n.language || 'pt');
+    setCurrentLang(i18n.language || "fr");
     const handleLanguageChange = (lng: string) => setCurrentLang(lng);
-    i18n.on('languageChanged', handleLanguageChange);
-    return () => i18n.off('languageChanged', handleLanguageChange);
+    i18n.on("languageChanged", handleLanguageChange);
+    return () => i18n.off("languageChanged", handleLanguageChange);
   }, [i18n]);
 
   const changeLanguage = (lng: string) => {
@@ -67,26 +67,26 @@ const Navigation = () => {
           <div className="flex items-center gap-3 sm:gap-6 text-white/80 text-xs sm:text-sm font-light" aria-label="Seleção de idioma">
             <button
               type="button"
-              onClick={() => changeLanguage('pt')}
-              aria-pressed={currentLanguage === 'pt'}
-              className={`hover:text-white transition-all duration-300 relative ${currentLanguage === 'pt' ? 'text-white' : 'text-white/50'
+              onClick={() => changeLanguage("fr")}
+              aria-pressed={currentLanguage === "fr"}
+              className={`hover:text-white transition-all duration-300 relative ${currentLanguage === "fr" ? "text-white" : "text-white/50"
                 }`}
             >
-              PT
-              {currentLanguage === 'pt' && (
+              FR
+              {currentLanguage === "fr" && (
                 <motion.div layoutId="underline" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white rounded-full" />
               )}
             </button>
             <span className="text-white/20">|</span>
             <button
               type="button"
-              onClick={() => changeLanguage('en')}
-              aria-pressed={currentLanguage === 'en'}
-              className={`hover:text-white transition-all duration-300 relative ${currentLanguage === 'en' ? 'text-white' : 'text-white/50'
+              onClick={() => changeLanguage("en")}
+              aria-pressed={currentLanguage === "en"}
+              className={`hover:text-white transition-all duration-300 relative ${currentLanguage === "en" ? "text-white" : "text-white/50"
                 }`}
             >
               EN
-              {currentLanguage === 'en' && (
+              {currentLanguage === "en" && (
                 <motion.div layoutId="underline" className="absolute -bottom-1 left-0 right-0 h-0.5 bg-white rounded-full" />
               )}
             </button>
@@ -104,7 +104,7 @@ const Navigation = () => {
             href="#reservation"
             className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs sm:text-sm font-medium tracking-wider uppercase transition-all duration-300 backdrop-blur-sm"
           >
-            {t('nav.contact')}
+            {t("nav.contact")}
           </a>
         </div>
       </div>

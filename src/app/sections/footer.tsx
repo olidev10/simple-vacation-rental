@@ -29,7 +29,7 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-12">
           <div className="space-y-4">
             <img
-              src="/logo_beach_house.png"
+              src="/logo_beach_house.svg"
               alt="Place To Be"
               className="w-28 mb-2"
             />

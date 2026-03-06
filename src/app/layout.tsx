@@ -23,7 +23,7 @@ export const metadata: Metadata = {
       "Hospede-se em uma casa de praia exclusiva em Itanhaém, litoral de São Paulo.",
     url: "/",
     siteName: "Place To Be",
-    locale: "pt_BR",
+    locale: "fr_FR",
     type: "website",
     images: [
       {
@@ -58,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
+    <html lang="fr">
       <body className="antialiased" suppressHydrationWarning>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

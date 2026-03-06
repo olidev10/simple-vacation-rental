@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { format } from "date-fns";
-import { ptBR, enUS } from "date-fns/locale";
+import { enUS, fr } from "date-fns/locale";
 import {
   CalendarIcon,
   User,
@@ -51,7 +51,7 @@ const ReservationForm = () => {
   const [guestsPopoverOpen, setGuestsPopoverOpen] = useState(false);
 
   const numberWhatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-  const locale = i18n.language === "en" ? enUS : ptBR;
+  const locale = i18n.language === "en" ? enUS : fr;
 
   // Preencher campos a partir dos query params (vindos do BookingWidget no hero)
   useEffect(() => {
@@ -178,7 +178,7 @@ const ReservationForm = () => {
       guests.adultos < 1; // Validação correta para o objeto
   
     if (isFormInvalid) {
-      alert(t("reservation.requiredError") || "Preencha todos os campos.");
+      alert(t("reservation.requiredError") || "Please fill all required fields.");
       return;
     }
   

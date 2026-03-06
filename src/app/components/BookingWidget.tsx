@@ -16,14 +16,14 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ButtonRounded } from "./ButtonRounded";
-import { ptBR } from "date-fns/locale";
+import { enUS, fr } from "date-fns/locale";
 import type { DateRange } from "react-day-picker";
 import { useQuery } from "@tanstack/react-query";
 import { getAirbnbCalendar, type Booking } from "@/lib/airbnbCalendar";
 import { PopoverGuest } from "./PopoverGuest";
 
 const BookingWidget = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const router = useRouter();
   const [checkOutOpen, setCheckOutOpen] = useState(false);
   const [checkInDate, setCheckInDate] = useState<Date | undefined>(undefined);
@@ -142,9 +142,9 @@ const BookingWidget = () => {
                       <CalendarIcon className="h-4 w-4 shrink-0" />
                       <span className="truncate">
                         {checkInDate && checkOutDate
-                          ? `${checkInDate.toLocaleDateString("pt-BR")} - ${checkOutDate.toLocaleDateString("pt-BR")}`
+                          ? `${checkInDate.toLocaleDateString(i18n.language === "fr" ? "fr-FR" : "en-US")} - ${checkOutDate.toLocaleDateString(i18n.language === "fr" ? "fr-FR" : "en-US")}`
                           : checkInDate
-                            ? `${checkInDate.toLocaleDateString("pt-BR")} - Selecione saída`
+                            ? `${checkInDate.toLocaleDateString(i18n.language === "fr" ? "fr-FR" : "en-US")} - ${t("reservation.checkOut")}`
                             : t("hero.data")}
                       </span>
                     </div>
@@ -166,12 +166,12 @@ const BookingWidget = () => {
                         }}
                         className="text-xs text-white/70 hover:text-white underline self-end"
                       >
-                        Limpar datas
+                        {i18n.language === "fr" ? "Effacer les dates" : "Clear dates"}
                       </button>
                     )}
                     <Calendar
                       mode="range"
-                      locale={ptBR}
+                      locale={i18n.language === "fr" ? fr : enUS}
                       selected={
                         checkInDate || checkOutDate
                           ? { from: checkInDate, to: checkOutDate }

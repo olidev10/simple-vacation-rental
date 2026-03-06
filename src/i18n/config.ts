@@ -1,234 +1,332 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-// Detecta o idioma do navegador ou usa o salvo no localStorage
 const getInitialLanguage = () => {
   if (typeof window !== "undefined") {
     const savedLang = localStorage.getItem("i18nextLng");
-    if (savedLang) return savedLang;
+    if (savedLang === "fr" || savedLang === "en") return savedLang;
+    if (savedLang === "pt") return "fr";
 
     const browserLang = navigator.language.split("-")[0];
-    return ["pt", "en"].includes(browserLang) ? browserLang : "pt";
+    return ["fr", "en"].includes(browserLang) ? browserLang : "fr";
   }
-  return "pt";
+  return "fr";
 };
 
-// Traduções
+const photoTranslations = {
+  1: {
+    title: "Piscine",
+    alt: "Piscine privative de 5 m avec eclairage LED et espace detente lateral",
+  },
+  2: {
+    title: "Decoration",
+    alt: "Ambiance instagrammable avec jardin artificiel et eclairage RGB",
+  },
+  3: {
+    title: "Espace Exterieur",
+    alt: "Grand espace avec piscine et cascade relaxante pour les loisirs en famille",
+  },
+  4: {
+    title: "Intimite",
+    alt: "Maison d angle avec meilleure ventilation, cameras 24h et surveillance",
+  },
+  5: {
+    title: "Garage",
+    alt: "Parking prive avec 3 places securisees dans la propriete",
+  },
+  6: {
+    title: "Salon",
+    alt: "Salon confortable avec Smart TV 50 pouces et canape-lit",
+  },
+  7: {
+    title: "Espace Gourmet",
+    alt: "Espace barbecue equipe integre a l aire de loisirs",
+  },
+  8: {
+    title: "Cuisine",
+    alt: "Cuisine fonctionnelle avec refrigerateur, cooktop et ustensiles complets",
+  },
+  9: {
+    title: "Salles de Bain",
+    alt: "Maison avec 2 salles de bain modernes et lavabo social avec eau chaude",
+  },
+  10: {
+    title: "Chambre 1",
+    alt: "Suite principale avec lit double et lits simples",
+  },
+  11: {
+    title: "Chambre 2",
+    alt: "Deuxieme suite privee avec excellente luminosite et confort",
+  },
+  12: {
+    title: "Chambre",
+    alt: "Chambre confortable avec bonne ventilation naturelle",
+  },
+  13: {
+    title: "Facade",
+    alt: "Vue exterieure de la maison de vacances",
+  },
+  14: {
+    title: "Loisirs",
+    alt: "Espace de loisirs pense pour des moments en famille",
+  },
+  15: {
+    title: "Salle a Manger",
+    alt: "Salle a manger integree avec espace pour toute la famille",
+  },
+  16: {
+    title: "Exterieur",
+    alt: "Perspective exterieure de la propriete avec zone detente",
+  },
+  17: {
+    title: "Piscine de Nuit",
+    alt: "Piscine eclairee de nuit dans une ambiance chaleureuse",
+  },
+  18: {
+    title: "Details",
+    alt: "Details de la maison qui renforcent le confort du sejour",
+  },
+} as const;
+
+const photoTranslationsEn = {
+  1: {
+    title: "Pool",
+    alt: "Private 5m pool with LED lighting and a side lounge area",
+  },
+  2: {
+    title: "Decoration",
+    alt: "Instagrammable setting with an artificial garden and RGB lighting",
+  },
+  3: {
+    title: "Outdoor Area",
+    alt: "Spacious area with pool and relaxing waterfall for family leisure",
+  },
+  4: {
+    title: "Privacy",
+    alt: "Corner house with better ventilation, 24h cameras, and monitoring",
+  },
+  5: {
+    title: "Garage",
+    alt: "Private parking with 3 secure spaces inside the property",
+  },
+  6: {
+    title: "Living Room",
+    alt: "Cozy living room with a 50-inch Smart TV and sofa bed",
+  },
+  7: {
+    title: "Gourmet Area",
+    alt: "Equipped barbecue area integrated with the leisure space",
+  },
+  8: {
+    title: "Kitchen",
+    alt: "Functional kitchen with fridge, cooktop, and full utensils",
+  },
+  9: {
+    title: "Bathrooms",
+    alt: "House with 2 modern bathrooms and a social washroom with hot water",
+  },
+  10: {
+    title: "Bedroom 1",
+    alt: "Master suite with one double bed and single beds",
+  },
+  11: {
+    title: "Bedroom 2",
+    alt: "Second private suite with excellent lighting and comfort",
+  },
+  12: {
+    title: "Bedroom",
+    alt: "Comfortable bedroom with good natural ventilation",
+  },
+  13: {
+    title: "Facade",
+    alt: "Exterior view of the vacation house",
+  },
+  14: {
+    title: "Leisure",
+    alt: "Leisure area designed for family moments",
+  },
+  15: {
+    title: "Dining Area",
+    alt: "Integrated dining area with room for the whole family",
+  },
+  16: {
+    title: "Exterior",
+    alt: "Exterior perspective of the property with chill area",
+  },
+  17: {
+    title: "Night Pool",
+    alt: "Pool at night with a cozy atmosphere",
+  },
+  18: {
+    title: "Details",
+    alt: "House details that improve stay comfort",
+  },
+} as const;
+
 const resources = {
-  pt: {
+  fr: {
     translation: {
       nav: {
-        home: "Início",
-        about: "Sobre",
-        amenities: "Comodidades",
-        photos: "Fotos",
-        reviews: "Avaliações",
-        contact: "Contato",
+        home: "Accueil",
+        about: "A propos",
+        amenities: "Commodites",
+        photos: "Photos",
+        reviews: "Avis",
+        contact: "Contact",
       },
       hero: {
-        title: "Explore Sua Casa de Praia",
-        subtitle: "dos Sonhos",
-        data: "Selecionar as datas",
-        guests: "Selecionar hóspedes",
-        guestSingular: "hóspede",
-        guestPlural: "hóspedes",
-        guest_singular: "hóspede",
-        guest_plural: "hóspedes",
-        dataLabel: "Datas",
-        guestsLabel: "Hóspedes",
-        buttonNext: "Próximo",
-        adults: "Adultos",
-        children: "Crianças",
-        babies: "Bebês",
-        animals: "Animais",
-        confirm: "Confirmar",
+        title: "Explorez Votre Maison de Plage",
+        subtitle: "de Reve",
+        data: "Selectionnez les dates",
+        guests: "Selectionnez les voyageurs",
+        guest_singular: "voyageur",
+        guest_plural: "voyageurs",
+        dataLabel: "Dates",
+        guestsLabel: "Voyageurs",
+        buttonNext: "Suivant",
+        adults: "Adultes",
+        children: "Enfants",
+        babies: "Bebes",
+        animals: "Animaux",
+        confirm: "Confirmer",
       },
       amenities: {
-        title: "Comodidades",
-        subtitle: "Tudo Para Seu ",
-        description: "Conforto",
-        pool: "Piscina Privativa",
+        title: "Commodites",
+        subtitle: "Tout Pour Votre ",
+        description: "Confort",
+        pool: "Piscine Privee",
         poolDesc:
-          "Aproveite uma piscina exclusiva com iluminação LED moderna, perfeita para relaxar a qualquer hora do dia ou da noite.",
-        bbq: "Churrasqueira",
+          "Profitez d une piscine exclusive avec eclairage LED moderne, parfaite pour se detendre a tout moment de la journee.",
+        bbq: "Espace Barbecue",
         bbqDesc:
-          "Espaço gourmet completo com churrasqueira e bancada, ideal para preparar refeições especiais em família e amigos.",
-        wifi: "Wi-Fi Rápido",
+          "Espace gourmet complet avec barbecue et comptoir, ideal pour des repas speciaux en famille ou entre amis.",
+        wifi: "Wi-Fi Rapide",
         wifiDesc:
-          "Conexão de fibra óptica de alta velocidade em toda a propriedade, garantindo estabilidade para trabalho ou lazer.",
-        parking: "Estacionamento",
+          "Connexion fibre optique haut debit dans toute la propriete, pour le travail comme pour les loisirs.",
+        parking: "Parking",
         parkingDesc:
-          "Garagem privativa e segura com capacidade para até 3 veículos, oferecendo total praticidade durante sua estadia.",
-        ac: "Ventilação",
+          "Garage prive et securise pouvant accueillir jusqu a 3 vehicules, pour un sejour pratique.",
+        ac: "Ventilation",
         acDesc:
-          "Ventiladores de teto de alta performance instalados em todos os quartos e na sala para garantir conforto térmico ideal.",
-        kitchen: "Cozinha Completa",
+          "Ventilateurs de plafond performants dans les chambres et le salon pour un confort thermique ideal.",
+        kitchen: "Cuisine Complete",
         kitchenDesc:
-          "Equipada com geladeira, cooktop e todos os utensílios necessários para o preparo prático de suas refeições favoritas.",
+          "Equipee d un refrigerateur, d un cooktop et de tous les ustensiles necessaires pour preparer vos repas.",
         tv: "Smart TV",
         tvDesc:
-          'Smart TV de 50" com acesso a diversos canais e plataformas de streaming como Netflix para sua diversão em família.',
-        security: "Segurança 24h",
+          "Smart TV 50 pouces avec acces aux chaines et plateformes de streaming comme Netflix.",
+        security: "Securite 24h",
         securityDesc:
-          "Propriedade monitorada por câmeras externas e protegida por cerca elétrica, garantindo total paz de espírito aos hóspedes.",
+          "Propriete surveillee par des cameras exterieures et protegee par cloture electrique.",
       },
       photos: {
-        galleryLabel: "GALERIA",
-        sectionTitle: "Explore Nossa",
-        sectionTitleHighlight: "Casa de Praia",
-        sectionDescription: "Descubra cada detalhe dos nossos espaços",
-        title: "Galeria de Fotos",
-        subtitle: "Conheça Nossa ",
-        subtitle2: "Casa de Praia",
-        description: "Cada detalhe pensado para proporcionar férias inesquecíveis",
-        showLess: "Exibir mais",
-        showMore: "Exibir menos",
-        photos: {
-          showMore: "Ver mais",
-          showLess: "Ver menos",
-          "images": {
-          "1": {
-            "title": "Piscina",
-            "alt": "Piscina privativa de 5m com iluminação LED e área de descanso lateral"
-          },
-          "2": {
-            "title": "Decoração",
-            "alt": "Ambiente instagramável com jardim artificial e iluminação RGB"
-          },
-          "3": {
-            "title": "Área Externa",
-            "alt": "Espaço amplo com piscina e cascata relaxante para lazer em família"
-          },
-          "4": {
-            "title": "Privacidade",
-            "alt": "Casa de esquina com maior ventilação, câmeras 24h e monitoramento"
-          },
-          "5": {
-            "title": "Garagem",
-            "alt": "Estacionamento privativo com 3 vagas seguras dentro da propriedade"
-          },
-          "6": {
-            "title": "Sala de Estar",
-            "alt": "Sala aconchegante com Smart TV 50 polegadas e sofá-cama"
-          },
-          "7": {
-            "title": "Espaço Gourmet",
-            "alt": "Área de churrasco equipada integrada à área de lazer"
-          },
-          "8": {
-            "title": "Cozinha",
-            "alt": "Cozinha funcional com geladeira, cooktop e utensílios completos"
-          },
-          "9": {
-            "title": "Banheiros",
-            "alt": "Casa com 2 banheiros modernos e lavabo social com água quente"
-          },
-          "10": {
-            "title": "Quarto 1",
-            "alt": "Suíte master com cama de casal e camas de solteiro"
-          },
-          "11": {
-            "title": "Quarto 2",
-            "alt": "Segunda suíte privativa com ótima iluminação e conforto"
-          }
-        }
-      }
+        galleryLabel: "GALERIE",
+        sectionTitle: "Explorez Notre",
+        sectionTitleHighlight: "Maison de Plage",
+        sectionDescription: "Decouvrez chaque detail de nos espaces",
+        title: "Galerie Photos",
+        subtitle: "Decouvrez Notre ",
+        subtitle2: "Maison",
+        description:
+          "Chaque detail est pense pour vous offrir des vacances inoubliables",
+        showLess: "Voir plus",
+        showMore: "Voir moins",
+        images: photoTranslations,
       },
       places: {
-        title: "Pontos Turísticos",
-        subtitle: "Belas Praias e Rica Cultura a Poucos ",
-        description: "Minutos de Distância",
-        dragHint: "Arraste para explorar os pontos turísticos da região",
+        title: "Lieux Touristiques",
+        subtitle: "Belles Plages et Culture Locale a Quelques ",
+        description: "Minutes",
+        dragHint: "Faites glisser pour explorer les points touristiques",
         items: {
           camaAnchieta: "Cama de Anchieta",
-          passarelaAnchieta: "Passarela de Anchieta",
-          praiaCibratel: "Praia Cibratel",
+          passarelaAnchieta: "Passerelle d Anchieta",
+          praiaCibratel: "Plage de Cibratel",
           morroParanambuco: "Morro do Paranambuco",
-          mulheresAreia: "Estátua Mulheres de Areia",
-          centrinho: "Centrinho da Cidade",
-          praiaSuarao: "Praia do Suarão",
-          praiaSonho: "Praia do Sonho",
+          mulheresAreia: "Statue Mulheres de Areia",
+          centrinho: "Centre-ville",
+          praiaSuarao: "Plage de Suarao",
+          praiaSonho: "Plage do Sonho",
         },
       },
       reviews: {
-        sectionLabel: "DEPOIMENTOS",
-        title: "Depoimentos",
-        subtitle: "O Que Nossos Hóspedes Dizem",
-        titlePrefix: "O Que Nossos ",
-        titleHighlight: "Hóspedes Dizem",
-        introBefore: "Exibindo as ",
-        introAfter: " avaliações mais recentes",
-        based: "Baseado em",
-        reviewsCount: "avaliações",
-        reviews_count: "avaliações",
-        verified: "Avaliações verificadas no Google",
-        viewAll: "Ver Todas as Avaliações",
-        viewMoreOnAirbnb: "Ver todas no Airbnb",
+        sectionLabel: "TEMOIGNAGES",
+        title: "Avis",
+        subtitle: "Ce Que Disent Nos Voyageurs",
+        titlePrefix: "Ce Que Disent Nos ",
+        titleHighlight: "Voyageurs",
+        introBefore: "affichage des ",
+        introAfter: " avis les plus recents",
+        based: "Base sur",
+        reviewsCount: "avis",
+        reviews_count: "avis",
+        verified: "Avis verifies sur Google",
+        viewAll: "Voir Tous Les Avis",
+        viewMoreOnAirbnb: "Voir plus sur Airbnb",
         google: "Google",
         airbnb: "Airbnb",
-        loading: "Carregando avaliações do Google...",
-        offline: "Avaliações em modo offline",
+        loading: "Chargement des avis Google...",
+        offline: "Avis en mode hors ligne",
       },
       footer: {
         tagline:
-          "Sua casa de praia dos sonhos com piscina privativa, vista para o mar e todas as comodidades para férias inesquecíveis.",
-        quickLinks: "Links Rápidos",
-        home: "Início",
-        photos: "Fotos",
-        amenities: "Comodidades",
-        reviews: "Avaliações",
-        reserve: "Reservar",
-        contact: "Entre em contato",
-        hours: "Horários",
+          "Votre maison de plage ideale avec piscine privee, vue mer et tout le confort pour des vacances inoubliables.",
+        quickLinks: "Liens Rapides",
+        home: "Accueil",
+        photos: "Photos",
+        amenities: "Commodites",
+        reviews: "Avis",
+        reserve: "Reserver",
+        contact: "Nous contacter",
+        hours: "Horaires",
         checkIn: "Check-in",
         checkOut: "Check-out",
-        serviceHours: "Atendimento",
-        serviceNote:
-          "Respondemos em até 2 horas durante o horário de atendimento",
-        rights: "Todos os direitos reservados",
-        madeWith: "Feito com",
-        madeWithLove: "para suas férias perfeitas",
+        serviceHours: "Service",
+        serviceNote: "Nous repondons sous 2 heures pendant les horaires de service",
+        rights: "Tous droits reserves",
+        madeWith: "Fait avec",
+        madeWithLove: "pour vos vacances parfaites",
       },
       reservation: {
-        rotating1: "Solicite",
-        rotating2: "Agora Mesmo",
-        rotating3: "Seu Orçamento",
+        rotating1: "Demandez",
+        rotating2: "Des Maintenant",
+        rotating3: "Votre Devis",
         subtitle:
-          "Reserve sua estadia dos sonhos e aproveite momentos inesquecíveis à beira-mar",
-        formTitle: "Reserve sua",
-        formTitleHighlight: "Experiência",
+          "Reservez votre sejour de reve et profitez de moments inoubliables au bord de la mer",
+        formTitle: "Reservez Votre",
+        formTitleHighlight: "Experience",
         formSubtitle:
-          "Preencha o formulário e receba seu orçamento personalizado em instantes via WhatsApp.",
-        checkIn: "Entrada",
-        checkOut: "Saída",
-        guests: "Hóspedes",
-        checkInTime: "Horário de Entrada",
-        selectPlaceholder: "Selecione",
-        timePlaceholder: "Selecione o horário",
-        morning: "Manhã (09:00 - 12:00)",
-        evening: "Noite (18:00 - 22:00)",
-        yourName: "Seu Nome",
-        namePlaceholder: "Digite seu nome",
-        messagePleaceholder: "Conte-nos mais sobre sua viagem, datas desejadas, etc.",
-        guestsPlaceholder: "Quantidade",
-        submit: "Solicitar Orçamento",
-        whatsappNote: "Você será redirecionado para o WhatsApp",
-        whatsappMessage: "Olá! Gostaria de solicitar um orçamento",
-        messageName: "Nome",
-        messageCheckIn: "Data de entrada",
-        messageCheckOut: "Data de saída",
-        messageTime: "Horário de entrada",
-        messageGuests: "Hóspedes",
+          "Remplissez le formulaire et recevez votre devis personnalise sur WhatsApp en quelques minutes.",
+        checkIn: "Arrivee",
+        checkOut: "Depart",
+        guests: "Voyageurs",
+        checkInTime: "Heure d Arrivee",
+        selectPlaceholder: "Selectionner",
+        timePlaceholder: "Selectionnez l heure",
+        morning: "Matin (09:00 - 12:00)",
+        evening: "Soir (18:00 - 22:00)",
+        yourName: "Votre Nom",
+        namePlaceholder: "Entrez votre nom",
+        guestsPlaceholder: "Quantite",
+        submit: "Demander un Devis",
+        whatsappNote: "Vous serez redirige vers WhatsApp",
+        whatsappMessage: "Bonjour ! Je souhaite demander un devis",
+        messageName: "Nom",
+        messageCheckIn: "Date d arrivee",
+        messageCheckOut: "Date de depart",
+        messageTime: "Heure d arrivee",
+        messageGuests: "Voyageurs",
+        requiredError: "Veuillez remplir tous les champs obligatoires.",
       },
       gallery: {
-        prev: "Anterior",
-        next: "Próximo",
+        prev: "Precedent",
+        next: "Suivant",
       },
       dock: {
-        home: "Home",
-        calendar: "Calendário",
-        photos: "Fotos",
-        reviews: "Avaliações",
+        home: "Accueil",
+        calendar: "Calendrier",
+        photos: "Photos",
+        reviews: "Avis",
       },
     },
   },
@@ -296,58 +394,14 @@ const resources = {
         subtitle: "Discover ",
         subtitle2: "Our House",
         description: "Every detail designed to provide an unforgettable vacation",
-        showLess: "Show less",
-        showMore: "Show more",
-        cards: {
-          pool: {
-            title: "Pool",
-            desc: "Private 5m pool with LED lighting and lateral lounge area. The perfect spot to relax under the sun with total privacy.",
-          },
-          decoration: {
-            title: "Decoration",
-            desc: "Instagrammable setting combining artificial garden and RGB lighting. The ideal scenery for your best vacation photos.",
-          },
-          external: {
-            title: "Outdoor Area",
-            desc: "Spacious area with pool and a relaxing waterfall. Designed to provide unforgettable family leisure moments during your stay.",
-          },
-          lateral: {
-            title: "Privacy",
-            desc: "Corner house ensuring better ventilation and privacy. Total security with 24h cameras and perimeter monitoring.",
-          },
-          garage: {
-            title: "Garage",
-            desc: "Private parking with 3 secure spaces. Peace of mind keeping your vehicles inside the property throughout your visit.",
-          },
-          living: {
-            title: "Living Room",
-            desc: 'Cozy living room with 50" Smart TV and sofa bed. Integrated environment perfect for relaxing after a long day at the beach.',
-          },
-          gourmet: {
-            title: "Gourmet Space",
-            desc: "Equipped barbecue area integrated with leisure facilities. Everything you need for special lunches by the pool.",
-          },
-          kitchen: {
-            title: "Kitchen",
-            desc: "Functional kitchen with fridge, cooktop, and full utensils. Practical setup for everything from breakfast to dinner.",
-          },
-          bathroom: {
-            title: "Bathrooms",
-            desc: "House with 2 modern bathrooms and a social powder room. Equipped with hot water and high-pressure showers for comfort.",
-          },
-          room1: {
-            title: "Bedroom 1",
-            desc: "Versatile master suite with 1 double and 2 single beds. Thermal comfort guaranteed with a quiet ceiling fan.",
-          },
-          room2: {
-            title: "Bedroom 2",
-            desc: "Second private suite with flexible accommodations and great lighting. The ideal refuge for a restorative night's sleep.",
-          },
-        },
+        showLess: "Show more",
+        showMore: "Show less",
+        images: photoTranslationsEn,
       },
       places: {
         title: "Tourist Places",
-        subtitle: "Beautiful Beaches and Rich Culture a Few Minutes Away ",
+        subtitle: "Beautiful Beaches and Rich Culture a Few ",
+        description: "Minutes Away",
         dragHint: "Drag to explore the region's tourist spots",
         items: {
           camaAnchieta: "Cama de Anchieta",
@@ -356,7 +410,7 @@ const resources = {
           morroParanambuco: "Morro do Paranambuco",
           mulheresAreia: "Mulheres de Areia Statue",
           centrinho: "Downtown",
-          praiaSuarao: "Suarão Beach",
+          praiaSuarao: "Suarao Beach",
           praiaSonho: "Praia do Sonho",
         },
       },
@@ -427,6 +481,7 @@ const resources = {
         messageCheckOut: "Check-out date",
         messageTime: "Check-in time",
         messageGuests: "Guests",
+        requiredError: "Please fill all required fields.",
       },
       gallery: {
         prev: "Previous",
@@ -442,18 +497,16 @@ const resources = {
   },
 };
 
-i18n
-  .use(initReactI18next) // Integra com React
-  .init({
-    resources,
-    fallbackLng: "pt", // Idioma padrão
-    lng: getInitialLanguage(), // Idioma inicial detectado
-    interpolation: {
-      escapeValue: false, // React já protege contra XSS
-    },
-  });
+i18n.use(initReactI18next).init({
+  resources,
+  supportedLngs: ["fr", "en"],
+  fallbackLng: "fr",
+  lng: getInitialLanguage(),
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
-// Salva a escolha do idioma no localStorage quando mudar
 i18n.on("languageChanged", (lng) => {
   if (typeof window !== "undefined") {
     localStorage.setItem("i18nextLng", lng);

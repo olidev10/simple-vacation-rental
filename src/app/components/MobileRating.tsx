@@ -25,15 +25,15 @@ function getSortTimestamp(review: { time?: number; date?: string }): number {
 
 export function MobileRating() {
   const { reviews, rating, totalReviews, isLoading } = useGoogleReviews();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const mappedReviews = useMemo(() => {
     return reviews.map((review, index) => {
-      let displayDate = "Data não disponível";
+      let displayDate = i18n.language === "fr" ? "Date indisponible" : "Date unavailable";
 
       if (review.time != null) {
         const dateObj = new Date(review.time * 1000);
-        displayDate = dateObj.toLocaleDateString("pt-BR");
+        displayDate = dateObj.toLocaleDateString(i18n.language === "fr" ? "fr-FR" : "en-US");
       } else if (review.date) {
         const parts = review.date.split("-");
         if (parts.length === 2) {
@@ -64,7 +64,7 @@ export function MobileRating() {
         sortTimestamp: getSortTimestamp(review),
       };
     });
-  }, [reviews]);
+  }, [reviews, i18n.language]);
 
   const ratingDistribution = useMemo(() => {
     const dist: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
@@ -116,7 +116,7 @@ export function MobileRating() {
         {isLoading && mappedReviews.length === 0 ? (
           <div className="text-center py-12 animate-fade-in">
             <p className="text-muted-foreground text-sm">
-              Carregando avaliações...
+              {t("reviews.loading")}
             </p>
           </div>
         ) : displayedReviews.length > 0 ? (
@@ -139,7 +139,7 @@ export function MobileRating() {
         ) : (
           <div className="text-center py-12 animate-fade-in">
             <p className="text-muted-foreground text-sm">
-              Nenhuma avaliação encontrada
+              {i18n.language === "fr" ? "Aucun avis trouve" : "No reviews found"}
             </p>
           </div>
         )}

@@ -20,7 +20,7 @@ export async function GET() {
     }
 
     // Primeiro, busca o place_id usando Nearby Search
-    const searchUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${LAT},${LNG}&radius=50&keyword=Botelho+Beach+House&key=${GOOGLE_API_KEY}&language=pt-BR`;
+    const searchUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${LAT},${LNG}&radius=50&keyword=Botelho+Beach+House&key=${GOOGLE_API_KEY}&language=fr-FR`;
     console.log("🌐 Buscando place_id...");
 
     const searchResponse = await fetch(searchUrl);
@@ -45,7 +45,7 @@ export async function GET() {
     console.log("📍 Nome:", place.name);
 
     // Agora busca os detalhes com as avaliações
-    const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&key=${GOOGLE_API_KEY}&language=pt-BR`;
+    const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&key=${GOOGLE_API_KEY}&language=fr-FR`;
     console.log("🌐 Buscando detalhes e avaliações...");
 
     const detailsResponse = await fetch(detailsUrl);

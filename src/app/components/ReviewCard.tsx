@@ -7,6 +7,7 @@ import {
 } from "@/app/components/ui/avatar";
 import StarRating from "./StarRating";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 export interface ReviewData {
   id: string;
@@ -37,6 +38,7 @@ const AVATAR_COLORS = [
 ];
 
 const ReviewCard = ({ review, index }: ReviewCardProps) => {
+  const { i18n } = useTranslation();
   const initials = review.author
     .trim()
     .split(/\s+/)
@@ -52,7 +54,10 @@ const ReviewCard = ({ review, index }: ReviewCardProps) => {
       const [year, month] = dateStr.split("-");
       const date = new Date(Number(year), Number(month) - 1);
       return date
-        .toLocaleDateString("pt-BR", { month: "short", year: "numeric" })
+        .toLocaleDateString(i18n.language === "fr" ? "fr-FR" : "en-US", {
+          month: "short",
+          year: "numeric",
+        })
         .replace(".", "");
     }
     return dateStr;
