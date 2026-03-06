@@ -1,273 +1,184 @@
+Header
 
-<p align="center">
-  <strong>Site de locação por temporada em Itanhaém, litoral paulista</strong>
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=next.js" />
-  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=000" />
-  <img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=fff" />
-  <img src="https://img.shields.io/badge/TailwindCSS-4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=fff" />
-</p>
+“Site de locação por temporada em Itanhaém, litoral paulista”
 
-<h1 align="center">🏖️ Botelho Beach House</h1>
+➡️ Seasonal rental website in Itanhaém, São Paulo coast
 
-<p align="center">
-  <strong>Landing page moderna para locação por temporada em Itanhaém – SP</strong>
-</p>
+🏖️ Place To Be
 
-<p align="center">
-  Experiência otimizada para conversão, performance e SEO.
-</p>
+Modern landing page for vacation rentals in Itanhaém – São Paulo
 
-<p align="center">
-  <a href="https://www.botelhobeachouse.com.br" target="_blank">
-    🔗 Acessar site
-  </a>
-</p>
+Optimized for conversion, performance, and SEO.
 
----
+🔗 Visit the website:
+https://www.botelhobeachouse.com.br
 
-## 🎬 Demonstração
+🎬 Demo
 
-<p align="center">
-  <img src="./docs/demo.gif" alt="Botelho Beach House Demo" width="100%" />
-</p>
+The GIF shows how the website works and how the user interacts with it.
 
+📌 Overview
 
----
+Place To Be is an institutional landing page created to promote an exclusive beach house in Itanhaém, located on the coast of São Paulo.
 
-# 📌 Visão Geral
+The project was built focusing on:
 
-A **Botelho Beach House** é uma landing page institucional desenvolvida para promover uma casa de praia exclusiva em Itanhaém, litoral paulista.
+⚡ High performance using App Router
 
-O projeto foi construído com foco em:
+🌍 Internationalization (Portuguese / English)
 
-- ⚡ Alta performance com App Router
-- 🌍 Internacionalização (PT / EN)
-- 📱 Responsividade total
-- 🔎 SEO avançado
-- 💬 Conversão via WhatsApp
-- 🎨 UI moderna com animações suaves
+📱 Fully responsive design
 
----
+🔎 Advanced SEO
 
-# 🧠 Stack Tecnológica
+💬 Conversion through WhatsApp
 
-| Categoria               | Tecnologias                          |
-| ----------------------- | ------------------------------------ |
-| **Framework**           | Next.js 16 (App Router)              |
-| **UI Library**          | React 19                             |
-| **Estilização**         | Tailwind CSS v4                      |
-| **Tipagem**             | TypeScript 5.9                       |
-| **Componentes**         | Radix UI, Lucide React, Tabler Icons |
-| **Animações**           | Motion                               |
-| **Data Fetching**       | TanStack React Query                 |
-| **Internacionalização** | i18next + react-i18next              |
-| **Datas**               | date-fns + react-day-picker          |
-| **Imagens**             | Cloudinary                           |
-| **WebGL**               | OGL                                  |
-| **Qualidade de Código** | ESLint + Prettier                    |
+🎨 Modern UI with smooth animations
 
----
+🧠 Tech Stack
+Category	Technologies
+Framework	Next.js 16
+UI Library	React 19
+Styling	TailwindCSS v4
+Typing	TypeScript 5.9
+Components	Radix UI, Lucide React, Tabler Icons
+Animations	Motion
+Data Fetching	TanStack React Query
+Internationalization	i18next + react-i18next
+Dates	date-fns + react-day-picker
+Images	Cloudinary
+WebGL	OGL
+Code Quality	ESLint + Prettier
+✨ Features
+🏝 Hero Section
 
-# ✨ Features
+Full-screen banner
 
-## 🏝 Hero Section
+Integrated booking widget
 
-- Banner full-screen
-- Widget de reserva integrado
-- CTA direto para WhatsApp
+Direct CTA to WhatsApp
 
-## 🖼 Galeria Responsiva
+🖼 Responsive Gallery
 
-- Layout adaptável
-- Otimização automática de imagens
-- Integração com Cloudinary
+Adaptive layout
 
-## 🏡 Comodidades
+Automatic image optimization
 
-- Piscina
-- Churrasqueira
-- Wi-Fi
-- Garagem
-- Cozinha equipada
+Integrated with Cloudinary
 
-## 📍 Pontos Turísticos
+🏡 Amenities
 
-- Cama de Anchieta
-- Praias locais
-- Centro da cidade
+Swimming pool
 
-## 📅 Sistema de Reserva
+Barbecue grill
 
-- Seleção de datas
-- Controle de hóspedes
-- Envio automático para WhatsApp
-- Integração com calendário Airbnb (iCal)
+Wi-Fi
 
-## ⭐ Avaliações
+Garage
 
-- Google Reviews (API)
-- Airbnb (estático)
-- Filtros por nota
+Fully equipped kitchen
 
-## 🌍 Internacionalização
+📍 Tourist Attractions
 
-- Português 🇧🇷
-- Inglês 🇺🇸
+Nearby places include:
 
-## 🔎 SEO Completo
+Cama de Anchieta
 
-- Metadata dinâmica
-- Open Graph
-- Twitter Cards
-- Sitemap.xml
-- Robots.txt
+Local beaches
 
----
+Downtown area
 
-# 🏗 Arquitetura
+📅 Reservation System
 
-<p align="center">
-  <a href="#-sobre">Sobre</a> •
-  <a href="#-tecnologias">Tecnologias</a> •
-  <a href="#-funcionalidades">Funcionalidades</a> •
-  <a href="#-estrutura">Estrutura</a> •
-  <a href="#-como-rodar">Como rodar</a> •
-  <a href="#-variáveis-de-ambiente">Variáveis</a>
-</p>
+Date selection
 
----
+Guest control
 
-## 📖 Sobre
+Automatic message sent to WhatsApp
 
-**Botelho Beach House** é o site oficial de uma casa de praia exclusiva em Itanhaém, no litoral de São Paulo. O projeto apresenta a propriedade, comodidades, galeria de fotos e permite que hóspedes solicitem orçamentos via WhatsApp.
+Integration with Airbnb calendar (iCal)
 
-> Hospede-se em uma casa de praia exclusiva em Itanhaém, litoral de São Paulo.
+⭐ Reviews
 
----
+Google Reviews (via Google API)
 
-## 🛠 Tecnologias
+Airbnb reviews (static)
 
-| Categoria       | Stack                                                                                                               |
-| --------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Framework**   | [Next.js 16](https://nextjs.org/) (App Router)                                                                      |
-| **UI**          | [React 19](https://react.dev/), [Tailwind CSS v4](https://tailwindcss.com/)                                         |
-| **Tipagem**     | [TypeScript 5.9](https://www.typescriptlang.org/)                                                                   |
-| **Componentes** | [Radix UI](https://www.radix-ui.com/), [Lucide React](https://lucide.dev/), [Tabler Icons](https://tabler.io/icons) |
-| **Animações**   | [Motion](https://motion.dev/)                                                                                       |
-| **Dados**       | [TanStack React Query](https://tanstack.com/query/latest)                                                           |
-| **i18n**        | [i18next](https://www.i18next.com/) + [react-i18next](https://react.i18next.com/)                                   |
-| **Datas**       | [date-fns](https://date-fns.org/), [react-day-picker](https://react-day-picker.js.org/)                             |
-| **Imagens**     | [Cloudinary](https://cloudinary.com/)                                                                               |
-| **WebGL**       | [OGL](https://github.com/oframe/ogl)                                                                                |
-| **Lint/Format** | ESLint, Prettier                                                                                                    |
+Rating filters
 
----
+🌍 Internationalization
 
-## ✨ Funcionalidades
+Supported languages:
 
-- **Hero** — Banner em tela cheia com widget de reserva
-- **Galeria** — Fotos da casa com layout responsivo
-- **Comodidades** — Piscina, churrasqueira, Wi‑Fi, garagem, cozinha e mais
-- **Pontos turísticos** — Cama de Anchieta, praias, centrinho e arredores
-- **Reserva** — Formulário com datas, hóspedes e envio via WhatsApp
-- **Avaliações** — Google (API) e Airbnb (estático), com filtros
-- **Calendário** — Integração com calendário do Airbnb (iCal)
-- **Internacionalização** — Português e Inglês
-- **SEO** — Metadados, Open Graph, Twitter Cards, sitemap, robots.txt
+Portuguese 🇧🇷
 
----
+English 🇺🇸
 
-## 📁 Estrutura
+🔎 SEO
 
-```
-botelho-beach-house/
-├── src/
-│   ├── app/
-│   │   ├── api/              # Rotas de API (Google Reviews)
-│   │   ├── components/       # Componentes da aplicação
-│   │   ├── providers/        # QueryProvider, I18nProvider
-│   │   ├── sections/         # Hero, Photos, Amenities, Places, etc.
-│   │   ├── layout.tsx
-│   │   ├── page.tsx
-│   │   ├── globals.css
-│   │   └── ...
-│   ├── components/ui/        # Componentes UI reutilizáveis
-│   ├── data/                 # Dados estáticos (avaliações Airbnb)
-│   ├── hooks/                # useMobile, useGoogleReviews
-│   ├── i18n/                 # Configuração e traduções (pt/en)
-│   └── lib/                  # Utilitários, calendário Airbnb
-├── public/
-├── package.json
-└── README.md
-```
+Dynamic metadata
 
----
+Open Graph
 
-## 🚀 Como rodar
+Twitter Cards
 
-### Pré-requisitos
+sitemap.xml
 
-- [Node.js](https://nodejs.org/) 18+
-- [pnpm](https://pnpm.io/) (recomendado) ou npm/yarn
+robots.txt
 
-### Instalação
+🏗 Architecture
 
-```bash
-# Clonar o repositório
+The project contains:
+
+API routes → used to fetch Google Reviews
+
+Reusable UI components
+
+Sections → Hero, photos, amenities, places, etc.
+
+Hooks → like useGoogleReviews
+
+i18n config → translations
+
+Utilities → Airbnb calendar integration
+
+Project structure:
+
+src/
+  app/
+    api/          -> API routes (Google Reviews)
+    components/   -> app components
+    providers/    -> global providers
+    sections/     -> Hero, Photos, Amenities
+🚀 How to Run the Project
+Requirements
+
+Node.js 18+
+
+pnpm (recommended)
+
+Install
 git clone https://github.com/seu-usuario/botelho-beach-house.git
 cd botelho-beach-house
-
-# Instalar dependências
 pnpm install
-```
-
-### Desenvolvimento
-
-```bash
+Run development server
 pnpm dev
-```
 
-Acesse [http://localhost:3000](http://localhost:3000).
+Open:
 
-### Build e produção
-
-```bash
-# Build
+http://localhost:3000
+Production
 pnpm build
-
-# Iniciar em produção
 pnpm start
-```
+🔐 Environment Variables
 
-### Lint
+Create a file called:
 
-```bash
-pnpm lint
-```
+.env.local
 
----
+Add:
 
-## 🔐 Variáveis de ambiente
+NEXT_PUBLIC_SITE_URL=https://botelhobeachhouse.com
+GOOGLE_PLACES_API_KEY=your_google_api_key_here
 
-Crie um arquivo `.env.local` na raiz do projeto:
-
-| Variável                | Descrição                                              |
-| ----------------------- | ------------------------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL`  | URL base do site (ex: `https://botelhobeachhouse.com`) |
-| `GOOGLE_PLACES_API_KEY` | Chave da API Google Places (para avaliações do Google) |
-
-> **Nota:** Sem `GOOGLE_PLACES_API_KEY`, as avaliações do Google não serão carregadas, mas o restante do site funciona normalmente.
-
----
-
-## 📄 Licença
-
-Projeto privado. Todos os direitos reservados.
-
----
-
-<p align="center">
-  Feito com ❤️ para suas férias perfeitas
-</p>
+Without the API key, Google reviews won't load, but the rest of the site will still work.
