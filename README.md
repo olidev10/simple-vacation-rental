@@ -1,14 +1,11 @@
-# Place To Be - Simple-vacation-rental
+# Place To Be — Vacation Rental Landing Page
 
-Landing page for a vacation rental in , built with Next.js App Router.
+🔗 **[Live Demo](https://simple-vacation-rental.vercel.app)**
 
-## Demo Video
+> A fully responsive vacation rental landing page with multilingual support, 
+> Google Reviews integration, and a WhatsApp reservation flow.
 
-<video src="./docs/demo.mov" controls muted playsinline width="100%">
-  Your browser does not support embedded videos.
-</video>
-
-If the video does not render on your GitHub view, use this direct file link: [docs/demo.mov](./docs/demo.mov).
+![screenshot](docs/screenshot.png)
 
 ## What This Project Includes
 
